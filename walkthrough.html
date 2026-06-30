@@ -530,20 +530,29 @@
     }
 
     @media (max-width: 768px) {
-      .video-stage, .scroll-track, .text-panel,
-      .scroll-progress, .scroll-indicator, .logo-fixed { display: none; }
-      .mobile-fallback { display: block; }
-    }
-    @media (min-width: 769px) {
+      .text-panel { max-width: 85vw; }
+      .text-panel.from-left { left: 20px; bottom: 60px; }
+      .text-panel.from-right { right: 20px; top: auto; bottom: 60px; transform: translateX(80px); text-align: left; }
+      .text-panel.active.from-right { transform: translateX(0); }
+      .text-panel.from-right .text-desc,
+      .text-panel.from-right .text-detail { margin-left: 0; }
+      .text-panel.from-right .text-detail { align-items: flex-start; }
+      .text-panel.from-left-mid { left: 20px; top: auto; bottom: 60px; transform: translateX(-80px) translateY(0); }
+      .text-panel.active.from-left-mid { transform: translateX(0) translateY(0); }
+      .text-panel.from-right-bottom { right: 20px; bottom: 60px; }
+      .text-panel.from-center { max-width: 85vw; }
+      .text-headline { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+      .text-desc { font-size: 0.85rem; }
+      .text-detail-item { font-size: 0.8rem; }
+      .text-cta { padding: 12px 24px; font-size: 0.82rem; }
+      .scroll-progress { right: 12px; }
+      .scroll-dot { width: 6px; height: 6px; }
+      .back-link { top: 16px; left: 16px; font-size: 0.75rem; }
+      .logo-fixed { top: 14px; right: 16px; }
+      .logo-fixed .logo-text { font-size: 0.9rem; }
       .mobile-fallback { display: none; }
     }
-    .mobile-fallback {
-      padding: 60px 24px; text-align: center;
-    }
-    .mobile-fallback video {
-      width: 100%; max-width: 500px; border-radius: 16px;
-      margin: 0 auto 32px;
-    }
+    .mobile-fallback { display: none; }
     .mobile-fallback h1 {
       font-family: var(--font-h); font-size: 2rem; font-weight: 700;
       margin-bottom: 8px;
@@ -996,15 +1005,20 @@ if (canvas) {
   let framesReady = false;
   let lastDrawn = -1;
 
-  canvas.width = 1280;
-  canvas.height = 720;
+  const isMobile = window.innerWidth < 768;
+  const FRAME_W = isMobile ? 720 : 1280;
+  const FRAME_H = isMobile ? 1280 : 720;
+  const FRAME_DIR = isMobile ? 'frames-mobile' : 'frames';
+
+  canvas.width = FRAME_W;
+  canvas.height = FRAME_H;
 
   function loadFrames() {
     let loaded = 0;
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image();
       const num = String(i + 1).padStart(4, '0');
-      img.src = 'frames/f_' + num + '.jpg';
+      img.src = FRAME_DIR + '/f_' + num + '.jpg';
       img.onload = function() {
         frames[i] = img;
         loaded++;
@@ -1032,7 +1046,7 @@ if (canvas) {
     const idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, index));
     if (!frames[idx]) return;
     lastDrawn = idx;
-    ctx.drawImage(frames[idx], 0, 0, 1280, 720);
+    ctx.drawImage(frames[idx], 0, 0, FRAME_W, FRAME_H);
   }
 
   let ticking = false;
