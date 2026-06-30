@@ -447,22 +447,60 @@
       position: absolute; inset: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 0;
     }
-    .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; z-index: 1; }
-    .exp-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 32px 24px; text-align: center;
-      transition: border-color var(--trans), transform var(--trans), background var(--trans);
+    .exp-split {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; background: var(--card);
     }
-    .exp-card:hover { border-color: rgba(212,165,71,0.3); transform: translateY(-3px); background: var(--card-alt); }
-    .exp-icon {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--gold-glow); border: 1px solid rgba(212,165,71,0.2);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 18px;
+    .exp-photo { position: relative; min-height: 520px; overflow: hidden; }
+    .exp-photo img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
     }
-    .exp-icon svg { width: 24px; height: 24px; fill: var(--gold); }
-    .exp-card h3 { font-family: var(--font-h); font-size: var(--text-lg); font-weight: 700; margin-bottom: 8px; }
-    .exp-card p { font-size: var(--text-sm); color: var(--gray); line-height: 1.7; }
+    .exp-body {
+      padding: 48px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .exp-body h2 {
+      font-family: var(--font-h); font-size: var(--text-3xl); font-weight: 700;
+      line-height: 1.15; margin-bottom: 14px;
+    }
+    .exp-body > p {
+      font-size: var(--text-sm); color: var(--gray);
+      line-height: 1.8; margin-bottom: 32px; max-width: 400px;
+    }
+    .exp-highlights { display: flex; flex-direction: column; gap: 22px; }
+    .exp-hl { display: flex; gap: 14px; align-items: flex-start; }
+    .exp-hl-marker {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); margin-top: 8px; flex-shrink: 0;
+    }
+    .exp-hl strong {
+      display: block; font-size: var(--text-base); font-weight: 700;
+      color: var(--white); margin-bottom: 3px;
+    }
+    .exp-hl span { font-size: var(--text-sm); color: var(--gray); line-height: 1.7; }
+
+    /* PHOTO STRIP */
+    .photo-strip {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+      margin-top: 24px; border-radius: var(--radius); overflow: hidden;
+    }
+    .photo-strip-item { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+    .photo-strip-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .photo-strip-item:hover img { transform: scale(1.06); }
+    .photo-strip-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 20px 16px 14px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.8);
+    }
 
     /* MENU */
     .menu-section { background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -522,25 +560,30 @@
 
     /* DRINKS */
     .drinks { background: transparent; }
-    .drinks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .drink-category {
+    .drinks-grid {
+      display: flex; gap: 0;
       background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden;
     }
+    .drink-category { flex: 1; }
+    .drink-category + .drink-category { border-left: 1px solid var(--border); }
     .drink-cat-header {
-      padding: 18px 22px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      text-align: center;
     }
-    .drink-cat-header svg { width: 20px; height: 20px; fill: var(--gold); }
-    .drink-cat-header h3 { font-size: 0.95rem; font-weight: 700; }
+    .drink-cat-header svg { display: none; }
+    .drink-cat-header h3 {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+    }
     .drink-item {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 13px 22px; border-bottom: 1px solid var(--border);
+      padding: 14px 24px; border-bottom: 1px solid var(--border);
       font-size: var(--text-sm);
     }
     .drink-item:last-child { border-bottom: none; }
     .drink-item .d-name { color: var(--gray); }
-    .drink-item .d-price { color: var(--gold); font-weight: 700; }
+    .drink-item .d-price { color: var(--white); font-weight: 600; font-family: var(--font-h); }
 
     /* REVIEWS */
     .reviews { background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -584,10 +627,11 @@
     }
     .card-header {
       padding: 18px 24px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px;
     }
-    .card-header svg { width: 18px; height: 18px; fill: var(--gold); }
-    .card-header h3 { font-size: 0.95rem; font-weight: 700; }
+    .card-header h3 {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+    }
     .hours-table { width: 100%; border-collapse: collapse; }
     .hours-table tr { border-bottom: 1px solid var(--border); }
     .hours-table tr:last-child { border-bottom: none; }
@@ -723,9 +767,14 @@
       .nav-links { display: none; }
       .nav-phone { display: none; }
       .hamburger { display: flex; }
-      .exp-grid { grid-template-columns: 1fr; gap: 14px; }
+      .exp-split { grid-template-columns: 1fr; }
+      .exp-photo { min-height: 280px; }
+      .exp-body { padding: 32px 24px; }
+      .photo-strip { grid-template-columns: 1fr; gap: 10px; }
+      .photo-strip-item { aspect-ratio: 16/9; }
       .menu-grid { grid-template-columns: 1fr; }
-      .drinks-grid { grid-template-columns: 1fr; }
+      .drinks-grid { flex-direction: column; }
+      .drink-category + .drink-category { border-left: none; border-top: 1px solid var(--border); }
       .hours-loc-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .mobile-sticky { display: block; }
@@ -918,53 +967,66 @@
 <section id="experience" class="experience section-pad">
   <canvas id="smoke-canvas" class="experience-canvas"></canvas>
   <div class="container">
-    <div class="section-header">
-      <span class="eyebrow">The Experience</span>
-      <h2>Your Spot to Unwind</h2>
-      <p>An intimate, low-light lounge with smooth hookah, good music, and a crowd that knows how to relax.</p>
+    <div class="exp-split">
+      <div class="exp-photo">
+        <img src="images/lounge.jpg" alt="Star Light Cafe main lounge with galaxy-painted walls, moon ceiling mural, and leather seating" loading="lazy">
+      </div>
+      <div class="exp-body">
+        <span class="eyebrow">The Experience</span>
+        <h2>Your Spot to Unwind</h2>
+        <p>An intimate, low-light lounge with smooth hookah, good music, and a crowd that knows how to relax.</p>
+        <div class="exp-highlights">
+          <div class="exp-hl">
+            <div class="exp-hl-marker"></div>
+            <div>
+              <strong>Premium Shisha</strong>
+              <span>Al Fakher and Starbuzz with 20+ flavors. Prepared fresh every session.</span>
+            </div>
+          </div>
+          <div class="exp-hl">
+            <div class="exp-hl-marker"></div>
+            <div>
+              <strong>Music On Request</strong>
+              <span>Your vibe, your playlist. Request any song and the team plays it.</span>
+            </div>
+          </div>
+          <div class="exp-hl">
+            <div class="exp-hl-marker"></div>
+            <div>
+              <strong>Chill Atmosphere</strong>
+              <span>Galaxy walls, moon ceiling, leather chairs. Open till 2 AM on weekends.</span>
+            </div>
+          </div>
+          <div class="exp-hl">
+            <div class="exp-hl-marker"></div>
+            <div>
+              <strong>Free Wi-Fi &amp; Pool</strong>
+              <span>Work remote or challenge friends to pool while your hookah is prepared.</span>
+            </div>
+          </div>
+          <div class="exp-hl">
+            <div class="exp-hl-marker"></div>
+            <div>
+              <strong>Bring Your Food</strong>
+              <span>Outside food welcome. Pair dinner with hookah and Moroccan tea.</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="exp-grid">
-      <div class="exp-card">
-        <div class="exp-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-        </div>
-        <h3>Premium Shisha</h3>
-        <p>Two world-class brands. Al Fakher and Starbuzz with over 20 flavors. Smooth, flavorful, prepared fresh every session.</p>
+
+    <div class="photo-strip">
+      <div class="photo-strip-item">
+        <img src="images/counter.jpg" alt="Star Light Cafe counter with gold star emblem and hookah display case" loading="lazy">
+        <div class="photo-strip-caption">The Counter</div>
       </div>
-      <div class="exp-card">
-        <div class="exp-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-        </div>
-        <h3>Music On Request</h3>
-        <p>Your vibe, your playlist. Request any song and the team plays it. From chill lo-fi to your favorite tracks.</p>
+      <div class="photo-strip-item">
+        <img src="images/soccer-corner.jpg" alt="Soccer viewing corner with big screen TV, leather couches, and string lights" loading="lazy">
+        <div class="photo-strip-caption">Soccer Viewing</div>
       </div>
-      <div class="exp-card">
-        <div class="exp-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 17h20v2H2v-2zm1.15-4.05L4 11.47l.85 1.48 1.3-.75-.85-1.48H7v-1.5H5.3l.85-1.47L4.85 7 4 8.47 3.15 7l-1.3.75.85 1.47H1v1.5h1.7l-.85 1.48 1.3.75zm6 0L10 11.47l.85 1.48 1.3-.75-.85-1.48H13v-1.5h-1.7l.85-1.47L10.85 7 10 8.47 9.15 7l-1.3.75.85 1.47H7v1.5h1.7l-.85 1.48 1.3.75zm6 0L16 11.47l.85 1.48 1.3-.75-.85-1.48H19v-1.5h-1.7l.85-1.47-1.3-.75L16 8.47 15.15 7l-1.3.75.85 1.47H13v1.5h1.7l-.85 1.48 1.3.75z"/></svg>
-        </div>
-        <h3>Chill Atmosphere</h3>
-        <p>Intimate, low-light setting. Bring your laptop, play pool, or just unwind with friends. Open till 2 AM on weekends.</p>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon">
-          <svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
-        </div>
-        <h3>Free Wi-Fi</h3>
-        <p>Fast, free Wi-Fi for everyone. Work remote, browse, stream. Regulars bring laptops and make it their second office.</p>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon">
-          <svg viewBox="0 0 24 24"><circle cx="15.5" cy="9.5" r="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M12 18c2.28 0 4.22-1.66 5-4H7c.78 2.34 2.72 4 5 4z"/><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-        </div>
-        <h3>Bring Your Food</h3>
-        <p>Outside food is welcome. No outside drinks, but bring dinner and pair it with our hookah and Moroccan tea.</p>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
-        </div>
-        <h3>Pool Tables</h3>
-        <p>Challenge your friends to a game while your hookah is prepared. The table stays busy on Friday and Saturday nights.</p>
+      <div class="photo-strip-item">
+        <img src="images/storefront.jpg" alt="Star Light Cafe exterior storefront at 14834 Buildamerica Dr, Woodbridge VA" loading="lazy">
+        <div class="photo-strip-caption">14834 Buildamerica Dr</div>
       </div>
     </div>
   </div>
@@ -1070,7 +1132,6 @@
     <div class="drinks-grid">
       <div class="drink-category">
         <div class="drink-cat-header">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
           <h3>Juices</h3>
         </div>
         <div class="drink-item">
@@ -1081,7 +1142,6 @@
 
       <div class="drink-category">
         <div class="drink-cat-header">
-          <svg viewBox="0 0 24 24"><path d="M2 21h18v-2H2v2zM20 8h-2V5h2V3H4v2h2v3H4c-1.1 0-2 .9-2 2v5h20v-5c0-1.1-.9-2-2-2z"/></svg>
           <h3>Smoothies</h3>
         </div>
         <div class="drink-item">
@@ -1096,7 +1156,6 @@
 
       <div class="drink-category">
         <div class="drink-cat-header">
-          <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
           <h3>Hot Drinks</h3>
         </div>
         <div class="drink-item">
@@ -1223,7 +1282,6 @@
     <div class="hours-loc-grid">
       <div class="info-card">
         <div class="card-header">
-          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
           <h3>Hours</h3>
         </div>
         <table class="hours-table">
@@ -1239,7 +1297,6 @@
 
       <div class="info-card">
         <div class="card-header">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 7a2.5 2.5 0 010 5z"/></svg>
           <h3>Location</h3>
         </div>
         <div class="loc-body">
@@ -1358,7 +1415,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo-text">Star Light <span class="cafe">Cafe</span><span>Hookah Bar</span></div>
+        <div class="logo-text">Star Light <span class="cafe">Cafe</span> <span>Hookah Bar</span></div>
         <p>Woodbridge's premier hookah lounge. Premium shisha, handcrafted drinks, pool tables, and the best vibe in town since day one.</p>
       </div>
       <div class="footer-col">
@@ -1475,12 +1532,20 @@
     }
   }
 
-  function drawFrame(index) {
-    if (index === lastDrawn) return;
-    var idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, index));
+  function drawFrame(exact) {
+    var idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.floor(exact)));
+    var next = Math.min(TOTAL_FRAMES - 1, idx + 1);
+    var blend = exact - idx;
+    if (idx === lastDrawn && blend < 0.01) return;
     if (!frames[idx]) return;
     lastDrawn = idx;
+    ctx.globalAlpha = 1;
     ctx.drawImage(frames[idx], 0, 0, FRAME_W, FRAME_H);
+    if (blend > 0.01 && frames[next] && next !== idx) {
+      ctx.globalAlpha = blend;
+      ctx.drawImage(frames[next], 0, 0, FRAME_W, FRAME_H);
+      ctx.globalAlpha = 1;
+    }
   }
 
   var ticking = false;
@@ -1492,8 +1557,8 @@
     var scrolled = window.scrollY - trackTop;
     var progress = Math.max(0, Math.min(1, scrolled / trackH));
 
-    var frameIndex = Math.round(progress * (TOTAL_FRAMES - 1));
-    drawFrame(frameIndex);
+    var frameExact = progress * (TOTAL_FRAMES - 1);
+    drawFrame(frameExact);
 
     var pastScroll = window.scrollY > trackTop + trackH;
 
