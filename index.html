@@ -8,18 +8,22 @@
   <meta name="keywords" content="hookah lounge Woodbridge VA, shisha bar Woodbridge, hookah bar near me, Star Light Cafe, hookah Woodbridge Virginia, best hookah lounge Prince William County, Al Fakher hookah, Starbuzz hookah, hookah bar 22191, lounge near Woodbridge">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Star Light Cafe Hookah Bar">
-  <link rel="canonical" href="https://starlightva.com/">
+  <link rel="canonical" href="https://starlight-cafe.com/">
 
   <meta property="og:title" content="Star Light Cafe | Hookah Lounge in Woodbridge, VA">
   <meta property="og:description" content="Premium hookah, handcrafted drinks, pool, and the best vibe in Woodbridge. Open daily from 5 PM.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://starlightva.com/">
+  <meta property="og:url" content="https://starlight-cafe.com/">
+  <meta property="og:image" content="https://starlight-cafe.com/assets/img/og-starlight.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Star Light Cafe">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Star Light Cafe | Hookah Lounge Woodbridge VA">
   <meta name="twitter:description" content="Premium hookah, handcrafted drinks, pool, and the best vibe in Woodbridge.">
+  <meta name="twitter:image" content="https://starlight-cafe.com/assets/img/og-starlight.jpg">
 
   <script type="application/ld+json">
   {
@@ -30,7 +34,7 @@
         "name": "Star Light Cafe Hookah Bar",
         "description": "Premium hookah lounge in Woodbridge, VA featuring Al Fakher and Starbuzz shisha, Moroccan mint tea, juices, smoothies, pool tables, and a relaxing atmosphere.",
         "telephone": "(703) 494-1004",
-        "url": "https://starlightva.com",
+        "url": "https://starlight-cafe.com",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "14834 Buildamerica Dr",
@@ -68,11 +72,26 @@
           "bestRating": "5"
         },
         "sameAs": ["https://www.facebook.com/StarlightcafewoodbridgeVA"]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"How old do you have to be?","acceptedAnswer":{"@type":"Answer","text":"You must be 21 years or older with a valid ID to enter Star Light Cafe, per federal tobacco law."}},
+          {"@type":"Question","name":"Can I bring my own food?","acceptedAnswer":{"@type":"Answer","text":"Yes. Outside food is welcome. Outside drinks are not allowed, but we have fresh juices, smoothies, and Moroccan mint tea."}},
+          {"@type":"Question","name":"What hookah brands do you carry?","acceptedAnswer":{"@type":"Answer","text":"We carry Al Fakher (11 flavors) and Starbuzz (9 flavors)."}},
+          {"@type":"Question","name":"How much does hookah cost?","acceptedAnswer":{"@type":"Answer","text":"Al Fakher starts at $10+tax per person. Starbuzz starts at $15+tax per person. For two people sharing, both brands are $27+tax."}},
+          {"@type":"Question","name":"Do you have Wi-Fi?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free Wi-Fi for all customers."}},
+          {"@type":"Question","name":"What are your hours?","acceptedAnswer":{"@type":"Answer","text":"Tuesday through Saturday: 5 PM to 1 AM. Sunday and Monday: 6 PM to 12 AM."}},
+          {"@type":"Question","name":"Do I need a reservation?","acceptedAnswer":{"@type":"Answer","text":"No reservation needed. Walk-ins are always welcome. For large groups on Friday or Saturday nights, calling ahead is a good idea."}}
+        ]
       }
     ]
   }
   </script>
 
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link rel="preload" as="image" href="frames/f_0001.jpg" fetchpriority="high">
   <link href="https://api.fontshare.com/v2/css?f[]=erode@400,500,600,700&f[]=synonym@400,500,700&display=swap" rel="stylesheet">
 
   <style>
@@ -130,8 +149,6 @@
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 
     /* AGE GATE */
-    #age-ok { position: absolute; left: -9999px; width: 0; height: 0; opacity: 0; }
-    #age-ok:checked ~ #age-gate { opacity: 0; pointer-events: none; visibility: hidden; }
     #age-gate {
       position: fixed; inset: 0; z-index: 9999;
       background: rgba(0,0,0,0.92);
@@ -741,6 +758,82 @@
     }
     .age-disclaimer strong { color: var(--white); }
 
+    /* BOOKING FORM */
+    .booking-section { background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .booking-form {
+      max-width: 600px; margin: 0 auto;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px 32px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0; }
+    .form-group:last-child:not(.form-row .form-group) { margin-bottom: 20px; }
+    .form-group label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 16px; color: var(--white);
+      font-family: var(--font-b); font-size: 0.9rem;
+      transition: border-color var(--trans);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none; border-color: rgba(212,165,71,0.5);
+    }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4A547' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px; padding-right: 36px; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%; padding: 14px; border: none; border-radius: 8px;
+      background: var(--gold); color: #0a0a10; font-weight: 800;
+      font-size: 0.95rem; cursor: pointer; transition: background var(--trans);
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: var(--gold-lt); }
+    .form-note {
+      text-align: center; font-size: 0.72rem; color: var(--gray-dim);
+      margin-top: 14px;
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .booking-form { padding: 28px 20px; }
+    }
+
+    /* VIBE SECTION */
+    .vibe-section { background: rgba(0,0,0,0.15); border-top: 1px solid var(--border); }
+    .vibe-img-wrap {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .vibe-img-wrap img { width: 100%; height: auto; display: block; }
+
+    /* OPEN-NOW PILL */
+    .open-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 16px; padding: 8px 18px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+    }
+    .open-pill.is-open {
+      background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #22c55e;
+    }
+    .open-pill.is-closed {
+      background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #ef4444;
+    }
+    .open-pill-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      animation: pillPulse 2s ease infinite;
+    }
+    .is-open .open-pill-dot { background: #22c55e; }
+    .is-closed .open-pill-dot { background: #ef4444; }
+    @keyframes pillPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
     /* MOBILE STICKY BAR */
     .mobile-sticky {
       display: none; position: fixed; bottom: 0; left: 0; right: 0;
@@ -810,17 +903,16 @@
 <body>
 
 <!-- AGE GATE -->
-<input type="checkbox" id="age-ok" aria-hidden="true">
-<div id="age-gate" role="dialog" aria-label="Age verification">
+<div id="age-gate" role="dialog" aria-modal="true" aria-label="Age verification">
   <div class="age-gate-box">
-    <div class="age-logo"><img src="logo.png" alt="Star Light Cafe" loading="eager"></div>
-    <h2>Are You 18 or Older?</h2>
-    <p>You must be at least 18 years old to enter Star Light Cafe. By entering, you confirm you meet the legal age requirement.</p>
+    <div class="age-logo"><picture><source type="image/webp" srcset="assets/img/logo-200.webp"><img src="assets/img/logo-200.png" alt="Star Light Cafe" loading="eager" width="200" height="auto"></picture></div>
+    <h2>Age Verification Required</h2>
+    <p>You must meet the legal age requirement for tobacco products to enter Star Light Cafe.</p>
     <div class="age-gate-btns">
-      <label for="age-ok" class="age-yes" role="button" tabindex="0">Yes, I'm 18+</label>
+      <button type="button" class="age-yes" id="age-yes-btn">Yes, I Qualify</button>
       <a href="https://www.google.com" class="age-no">No, Leave</a>
     </div>
-    <p class="age-gate-note">Virginia state law requires customers to be 18+ to purchase or use tobacco products.</p>
+    <p class="age-gate-note">Federal law requires customers to be 21+ to purchase tobacco products.</p>
   </div>
 </div>
 
@@ -835,7 +927,10 @@
 <nav id="main-nav">
   <div class="container nav-inner">
     <a href="#" class="logo-wrap">
-      <img src="logo.png" alt="Star Light Cafe Hookah Bar" loading="eager">
+      <picture>
+        <source type="image/webp" srcset="assets/img/logo-200.webp">
+        <img src="assets/img/logo-200.png" alt="Star Light Cafe Hookah Bar" loading="eager" width="200" height="auto">
+      </picture>
     </a>
     <div class="nav-links">
       <a href="#experience">Experience</a>
@@ -860,6 +955,7 @@
   <a href="#experience" onclick="this.parentElement.classList.remove('open')">Experience</a>
   <a href="#menu" onclick="this.parentElement.classList.remove('open')">Menu</a>
   <a href="#reviews" onclick="this.parentElement.classList.remove('open')">Reviews</a>
+  <a href="#booking" onclick="this.parentElement.classList.remove('open')">Book</a>
   <a href="#location" onclick="this.parentElement.classList.remove('open')">Visit</a>
   <a href="tel:+17034941004" class="m-call">Call (703) 494-1004</a>
 </div>
@@ -871,7 +967,7 @@
 <div class="text-panel from-center" id="panel-0" data-range="0,0.18">
   <div class="text-eyebrow">Welcome to</div>
   <h1 class="text-headline" style="line-height:0; margin-bottom:10px;">
-    <img src="logo.png" alt="Star Light Cafe Hookah Bar" class="panel-logo">
+    <picture><source type="image/webp" srcset="assets/img/logo-400.webp"><img src="assets/img/logo-200.png" alt="Star Light Cafe Hookah Bar" class="panel-logo"></picture>
   </h1>
   <p class="text-desc">Woodbridge's premier hookah lounge. Step inside a cosmic atmosphere where every wall tells a story.</p>
 </div>
@@ -885,7 +981,7 @@
 <div class="text-panel from-right" id="panel-2" data-range="0.38,0.58">
   <div class="text-eyebrow">Premium Selection</div>
   <h2 class="text-headline">Al Fakher. Starbuzz. Crafted drinks.</h2>
-  <p class="text-desc">Over 50 premium hookah flavors, Moroccan mint tea, fresh juices, smoothies, and a full drink menu. Every session, curated.</p>
+  <p class="text-desc">20 premium hookah flavors across two world-class brands, Moroccan mint tea, fresh juices, smoothies, and a full drink menu. Every session, curated.</p>
 </div>
 
 <div class="text-panel from-left-mid" id="panel-3" data-range="0.58,0.78">
@@ -948,7 +1044,7 @@
     <div class="marquee-item">Pool Tables</div>
     <div class="marquee-item">Free Wi-Fi</div>
     <div class="marquee-item">Open Late</div>
-    <div class="marquee-item">18+ Lounge</div>
+    <div class="marquee-item">21+ Lounge</div>
     <div class="marquee-item">BYOF Friendly</div>
     <div class="marquee-item">Al Fakher</div>
     <div class="marquee-item">Starbuzz</div>
@@ -956,7 +1052,7 @@
     <div class="marquee-item">Pool Tables</div>
     <div class="marquee-item">Free Wi-Fi</div>
     <div class="marquee-item">Open Late</div>
-    <div class="marquee-item">18+ Lounge</div>
+    <div class="marquee-item">21+ Lounge</div>
     <div class="marquee-item">BYOF Friendly</div>
   </div>
 </section>
@@ -967,7 +1063,10 @@
   <div class="container">
     <div class="exp-split">
       <div class="exp-photo">
-        <img src="images/lounge.jpg" alt="Star Light Cafe main lounge with galaxy-painted walls, moon ceiling mural, and leather seating" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="assets/img/lounge-640.webp 640w, assets/img/lounge-1024.webp 1024w, assets/img/lounge-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw">
+          <img src="assets/img/lounge-1600.jpg" alt="Star Light Cafe main lounge with galaxy-painted walls, moon ceiling mural, and leather seating" loading="lazy" width="1600" height="1067">
+        </picture>
       </div>
       <div class="exp-body">
         <span class="eyebrow">The Experience</span>
@@ -978,7 +1077,7 @@
             <div class="exp-hl-marker"></div>
             <div>
               <strong>Premium Shisha</strong>
-              <span>Al Fakher and Starbuzz with 20+ flavors. Prepared fresh every session.</span>
+              <span>Al Fakher and Starbuzz with 20 flavors. Prepared fresh every session.</span>
             </div>
           </div>
           <div class="exp-hl">
@@ -1015,15 +1114,24 @@
 
     <div class="photo-strip">
       <div class="photo-strip-item">
-        <img src="images/counter.jpg" alt="Star Light Cafe counter with gold star emblem and hookah display case" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="assets/img/counter-640.webp 640w, assets/img/counter-1024.webp 1024w, assets/img/counter-1600.webp 1600w" sizes="(max-width:900px) 100vw, 33vw">
+          <img src="assets/img/counter-1600.jpg" alt="Star Light Cafe counter with gold star emblem and hookah display case" loading="lazy" width="1600" height="1067">
+        </picture>
         <div class="photo-strip-caption">The Counter</div>
       </div>
       <div class="photo-strip-item">
-        <img src="images/soccer-corner.jpg" alt="Soccer viewing corner with big screen TV, leather couches, and string lights" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="assets/img/soccer-corner-640.webp 640w, assets/img/soccer-corner-1024.webp 1024w, assets/img/soccer-corner-1600.webp 1600w" sizes="(max-width:900px) 100vw, 33vw">
+          <img src="assets/img/soccer-corner-1600.jpg" alt="Soccer viewing corner with big screen TV, leather couches, and string lights" loading="lazy" width="1600" height="1067">
+        </picture>
         <div class="photo-strip-caption">Live Sports Streaming</div>
       </div>
       <div class="photo-strip-item">
-        <img src="images/storefront.jpg" alt="Star Light Cafe exterior storefront at 14834 Buildamerica Dr, Woodbridge VA" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="assets/img/storefront-640.webp 640w, assets/img/storefront-1024.webp 1024w, assets/img/storefront-1600.webp 1600w" sizes="(max-width:900px) 100vw, 33vw">
+          <img src="assets/img/storefront-1600.jpg" alt="Star Light Cafe exterior storefront at 14834 Buildamerica Dr, Woodbridge VA" loading="lazy" width="1600" height="1067">
+        </picture>
         <div class="photo-strip-caption">14834 Buildamerica Dr</div>
       </div>
     </div>
@@ -1036,7 +1144,7 @@
     <div class="section-header">
       <span class="eyebrow">Our Menu</span>
       <h2>Premium Shisha Selection</h2>
-      <p>Two world-class tobacco brands with over 20 flavors. Prepared fresh, served smooth.</p>
+      <p>Two world-class tobacco brands with 20 flavors. Prepared fresh, served smooth.</p>
     </div>
 
     <div class="menu-grid">
@@ -1072,7 +1180,7 @@
             <span class="flavor-tag">Blue Mist</span>
             <span class="flavor-tag">White Mint</span>
             <span class="flavor-tag">Gum</span>
-            <span class="flavor-tag">Sex on Beach</span>
+            <span class="flavor-tag">Sex on the Beach</span>
             <span class="flavor-tag">Code69</span>
             <span class="flavor-tag">Peach Mist</span>
             <span class="flavor-tag">Irish Kiss</span>
@@ -1113,7 +1221,7 @@
 
     <div class="special-banner">
       <h4>Friday &amp; Saturday Special</h4>
-      <p>Any hookah, any flavor. The best nights to come through.</p>
+      <p>Weekend specials available. Ask about current deals when you visit.</p>
     </div>
   </div>
 </section>
@@ -1261,11 +1369,74 @@
     </div>
 
     <div class="review-cta">
-      <a href="https://www.google.com/maps/place/StarLight+Cafe/@38.6310327,-77.2731584,19z/" target="_blank">
+      <a href="https://search.google.com/local/writereview?placeid=ChIJ0bNkXnxftiMRAAAAAAAAAA" target="_blank">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
         Leave a Review on Google
       </a>
     </div>
+  </div>
+</section>
+
+<!-- THE VIBE -->
+<section id="vibe" class="vibe-section section-pad">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">The Vibe</span>
+      <h2>See It for Yourself</h2>
+      <p>Galaxy ceilings, hookah smoke, live soccer, and a crowd that knows how to have a good time.</p>
+    </div>
+    <div class="vibe-img-wrap">
+      <picture>
+        <source type="image/webp" srcset="assets/img/vibe-crowd-640.webp 640w, assets/img/vibe-crowd-1024.webp 1024w, assets/img/vibe-crowd-1600.webp 1600w" sizes="(max-width:768px) 100vw, 1100px">
+        <img src="assets/img/vibe-crowd-1600.jpg" alt="Star Light Cafe packed lounge with galaxy ceiling, celebrity mural, hookah smoke, and soccer on TV" loading="lazy" width="1600" height="1600">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- GROUP BOOKING -->
+<section id="booking" class="booking-section section-pad">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Groups &amp; Events</span>
+      <h2>Book Your Night</h2>
+      <p>Planning a birthday, team hangout, or watch party? Let us set up your section.</p>
+    </div>
+    <form class="booking-form" id="bookingForm" action="https://kg-capture-lead.vercel.app/api/lead" method="POST">
+      <input type="hidden" name="source" value="starlight-cafe-booking">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="b-name">Your Name</label>
+          <input type="text" id="b-name" name="name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="b-phone">Phone</label>
+          <input type="tel" id="b-phone" name="phone" required autocomplete="tel">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="b-date">Preferred Date</label>
+          <input type="date" id="b-date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="b-size">Group Size</label>
+          <select id="b-size" name="group_size" required>
+            <option value="">Select</option>
+            <option value="4-6">4-6 people</option>
+            <option value="7-10">7-10 people</option>
+            <option value="11-15">11-15 people</option>
+            <option value="16+">16+ people</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="b-notes">Anything we should know?</label>
+        <textarea id="b-notes" name="notes" rows="3" placeholder="Birthday, watch party, special requests..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Request Booking</button>
+      <p class="form-note">We'll call or text you to confirm within 24 hours.</p>
+    </form>
   </div>
 </section>
 
@@ -1275,6 +1446,7 @@
     <div class="section-header">
       <span class="eyebrow">Visit Us</span>
       <h2>Hours &amp; Location</h2>
+      <div class="open-pill" id="openPill" style="display:none"></div>
     </div>
 
     <div class="hours-loc-grid">
@@ -1313,9 +1485,13 @@
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
               Facebook
             </a>
+            <a href="https://www.instagram.com/starlightcafe_va/" target="_blank" class="loc-btn loc-btn-secondary">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5M12 7a5 5 0 110 10 5 5 0 010-10m0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+              Instagram
+            </a>
           </div>
         </div>
-        <iframe class="map-embed" src="https://www.openstreetmap.org/export/embed.html?bbox=-77.2761%2C38.6290%2C-77.2701%2C38.6330&amp;layer=mapnik&amp;marker=38.6310%2C-77.2731" loading="lazy" title="Star Light Cafe location map"></iframe>
+        <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d776.7!2d-77.2731406!3d38.6309894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b65f7c5e64b3d1%3A0x0!2s14834+Buildamerica+Dr%2C+Woodbridge%2C+VA+22191!5e0!3m2!1sen!2sus!4v1" loading="lazy" title="Star Light Cafe location map" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
@@ -1335,7 +1511,7 @@
           How old do you have to be?
           <span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a">You must be 18 years or older with a valid ID to enter Star Light Cafe. This is Virginia state law for tobacco establishments.</div>
+        <div class="faq-a">You must be 21 years or older with a valid ID to enter Star Light Cafe, per federal tobacco law.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
@@ -1413,7 +1589,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo-text">Star Light <span class="cafe">Cafe</span> <span>Hookah Bar</span></div>
+        <picture><source type="image/webp" srcset="assets/img/logo-200.webp"><img src="assets/img/logo-200.png" alt="Star Light Cafe" style="height:40px;width:auto;"></picture>
         <p>Woodbridge's premier hookah lounge. Premium shisha, handcrafted drinks, pool tables, and the best vibe in town since day one.</p>
       </div>
       <div class="footer-col">
@@ -1435,12 +1611,13 @@
         <h4 style="margin-top:24px">Follow Us</h4>
         <ul>
           <li><a href="https://www.facebook.com/StarlightcafewoodbridgeVA" target="_blank">Facebook</a></li>
+          <li><a href="https://www.instagram.com/starlightcafe_va/" target="_blank">Instagram</a></li>
         </ul>
       </div>
     </div>
 
     <div class="age-disclaimer">
-      <strong>18+ Only.</strong> You must be 18 years or older to enter Star Light Cafe. Virginia state law.
+      <strong>21+ Only.</strong> You must meet the legal age requirement for tobacco products to enter Star Light Cafe.
     </div>
 
     <div class="footer-bottom">
@@ -1468,6 +1645,145 @@
 
 <script>
 (function(){
+  /* ═══════════════════════════════════════════════════════════
+     SITE CONFIG - Single source of truth
+     ═══════════════════════════════════════════════════════════ */
+  var SITE = {
+    name: 'Star Light Cafe Hookah Bar',
+    phone: '(703) 494-1004',
+    phoneTel: '+17034941004',
+    address: '14834 Buildamerica Dr',
+    city: 'Woodbridge',
+    state: 'VA',
+    zip: '22191',
+    lat: 38.6309894,
+    lng: -77.2731406,
+    url: 'https://starlight-cafe.com',
+    facebook: 'https://www.facebook.com/StarlightcafewoodbridgeVA',
+    instagram: 'https://www.instagram.com/starlightcafe_va/',
+    MINIMUM_AGE: 21,
+    AGE_GATE_EXPLICIT: false,
+    hours: {
+      0: { open: 18, close: 24, label: 'Sunday' },
+      1: { open: 18, close: 24, label: 'Monday' },
+      2: { open: 17, close: 25, label: 'Tuesday' },
+      3: { open: 17, close: 25, label: 'Wednesday' },
+      4: { open: 17, close: 25, label: 'Thursday' },
+      5: { open: 17, close: 25, label: 'Friday' },
+      6: { open: 17, close: 25, label: 'Saturday' }
+    },
+    flavors: {
+      alFakher: ['White Grape','Double Apple','Orange','Strawberry','Peach','Watermelon','Pineapple','Vanilla','Mint','Mango','Lemon'],
+      starbuzz: ['Blue Mist','White Mint','Gum','Sex on the Beach','Code69','Peach Mist','Irish Kiss','Melon Dew','Pan']
+    },
+    pricing: {
+      alFakherPP: '$10+tax',
+      starbuzzPP: '$15+tax',
+      refill: '$15+tax',
+      alFakherFor2: '$27+tax',
+      starbuzzFor2: '$27+tax',
+      disposableHose: '$3.00'
+    }
+  };
+
+  /* ═══════════════════════════════════════════════════════════
+     AGE GATE - localStorage with 30-day memory
+     ═══════════════════════════════════════════════════════════ */
+  var ageGate = document.getElementById('age-gate');
+  var ageBtn = document.getElementById('age-yes-btn');
+  var AGE_KEY = 'sl_age_verified';
+  var AGE_TTL = 30 * 24 * 60 * 60 * 1000;
+
+  function isAgeVerified() {
+    try {
+      var ts = localStorage.getItem(AGE_KEY);
+      if (!ts) return false;
+      return (Date.now() - parseInt(ts, 10)) < AGE_TTL;
+    } catch(e) { return false; }
+  }
+
+  function dismissAgeGate() {
+    try { localStorage.setItem(AGE_KEY, String(Date.now())); } catch(e) {}
+    ageGate.style.opacity = '0';
+    ageGate.style.pointerEvents = 'none';
+    ageGate.style.visibility = 'hidden';
+    document.body.style.overflow = '';
+    trackEvent('age_gate', 'verified');
+  }
+
+  if (isAgeVerified()) {
+    ageGate.style.display = 'none';
+  } else {
+    document.body.style.overflow = 'hidden';
+    if (ageBtn) {
+      ageBtn.addEventListener('click', dismissAgeGate);
+      ageBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dismissAgeGate(); }
+      });
+      ageBtn.focus();
+    }
+    ageGate.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        var focusable = ageGate.querySelectorAll('button, a, [tabindex]');
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     OPEN-NOW PILL
+     ═══════════════════════════════════════════════════════════ */
+  var openPill = document.getElementById('openPill');
+  function updateOpenPill() {
+    if (!openPill) return;
+    var now = new Date();
+    var day = now.getDay();
+    var hour = now.getHours() + now.getMinutes() / 60;
+    var h = SITE.hours[day];
+    var isOpen = hour >= h.open && hour < h.close;
+    openPill.style.display = 'inline-flex';
+    openPill.className = 'open-pill ' + (isOpen ? 'is-open' : 'is-closed');
+    if (isOpen) {
+      var closeHr = h.close > 24 ? h.close - 24 : h.close;
+      var closeAmPm = closeHr >= 12 ? 'AM' : 'PM';
+      if (closeHr > 12) closeHr -= 12;
+      openPill.innerHTML = '<span class="open-pill-dot"></span> Open Now · Closes at ' + closeHr + ' ' + closeAmPm;
+    } else {
+      var nextDay = day;
+      var nextH = h;
+      if (hour >= h.close || hour >= 24) {
+        nextDay = (day + 1) % 7;
+        nextH = SITE.hours[nextDay];
+      }
+      var openHr = nextH.open > 12 ? nextH.open - 12 : nextH.open;
+      openPill.innerHTML = '<span class="open-pill-dot"></span> Closed · Opens at ' + openHr + ' PM';
+    }
+  }
+  updateOpenPill();
+  setInterval(updateOpenPill, 60000);
+
+  /* ═══════════════════════════════════════════════════════════
+     ANALYTICS HELPERS
+     ═══════════════════════════════════════════════════════════ */
+  function trackEvent(category, action, label) {
+    if (typeof gtag === 'function') {
+      gtag('event', action, { event_category: category, event_label: label || '' });
+    }
+  }
+
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(a) {
+    a.addEventListener('click', function() { trackEvent('contact', 'phone_click'); });
+  });
+  document.querySelectorAll('a[href*="maps/dir"]').forEach(function(a) {
+    a.addEventListener('click', function() { trackEvent('contact', 'directions_click'); });
+  });
+  document.querySelectorAll('.review-cta a').forEach(function(a) {
+    a.addEventListener('click', function() { trackEvent('engagement', 'review_click'); });
+  });
+
   /* NAV SCROLL */
   var nav = document.getElementById('main-nav');
 
@@ -1511,18 +1827,22 @@
           frames[idx] = img;
           loaded++;
           if (loadPct) loadPct.textContent = Math.round((loaded / TOTAL_FRAMES) * 100);
-          if (loaded === TOTAL_FRAMES) {
+          if (idx === 0 && !framesReady) { drawFrame(0); }
+          if (loaded >= 20 && !framesReady) {
             framesReady = true;
+            update();
+          }
+          if (loaded === TOTAL_FRAMES) {
             if (loader) loader.classList.add('hidden');
-            drawFrame(0);
+            if (!framesReady) { framesReady = true; }
             update();
           }
         };
         img.onerror = function() {
           loaded++;
           if (loaded === TOTAL_FRAMES) {
-            framesReady = true;
             if (loader) loader.classList.add('hidden');
+            if (!framesReady) { framesReady = true; }
             update();
           }
         };
