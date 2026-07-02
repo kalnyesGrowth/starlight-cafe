@@ -146,10 +146,9 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.6);
     }
     .age-gate-box .age-logo {
-      font-family: var(--font-h); font-size: 1.6rem; font-weight: 700;
-      margin-bottom: 8px; color: var(--white);
+      margin-bottom: 8px;
     }
-    .age-gate-box .age-logo span { color: var(--gold); font-style: italic; }
+    .age-gate-box .age-logo img { height: 80px; width: auto; }
     .age-gate-box .age-sub {
       font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
@@ -814,8 +813,7 @@
 <input type="checkbox" id="age-ok" aria-hidden="true">
 <div id="age-gate" role="dialog" aria-label="Age verification">
   <div class="age-gate-box">
-    <div class="age-logo">Star Light <span class="cafe">Cafe</span></div>
-    <div class="age-sub">Hookah Bar</div>
+    <div class="age-logo"><img src="logo.png" alt="Star Light Cafe" loading="eager"></div>
     <h2>Are You 18 or Older?</h2>
     <p>You must be at least 18 years old to enter Star Light Cafe. By entering, you confirm you meet the legal age requirement.</p>
     <div class="age-gate-btns">
