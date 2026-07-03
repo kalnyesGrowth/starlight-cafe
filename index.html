@@ -1402,7 +1402,7 @@
       <h2>Book Your Night</h2>
       <p>Planning a birthday, team hangout, or watch party? Let us set up your section.</p>
     </div>
-    <form class="booking-form" id="bookingForm" action="https://kg-capture-lead.vercel.app/api/lead" method="POST">
+    <form class="booking-form" id="bookingForm">
       <input type="hidden" name="source" value="starlight-cafe-booking">
       <div class="form-row">
         <div class="form-group">
@@ -2008,5 +2008,48 @@
 })();
 </script>
 
+<!-- KG Dashboard: tracker + lead capture -->
+<script src="https://project-kday6.vercel.app/tracker/tracker.js" data-client="3b629a85-4e70-48b2-8fa3-7bdb8eb58c60"></script>
+<script>
+(function(){
+  var form = document.getElementById('bookingForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.form-submit');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    var name = form.querySelector('#b-name').value.trim();
+    var phone = form.querySelector('#b-phone').value.trim();
+    var date = form.querySelector('#b-date').value;
+    var size = form.querySelector('#b-size').value;
+    var notes = form.querySelector('#b-notes').value.trim();
+    var message = 'Booking request: ' + date + ', ' + size + ' people' + (notes ? '. ' + notes : '');
+    fetch('https://boddsbxlaytcrkpuckyn.supabase.co/functions/v1/capture-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client_id: '3b629a85-4e70-48b2-8fa3-7bdb8eb58c60',
+        name: name,
+        phone: phone,
+        message: message,
+        source_url: window.location.href
+      })
+    }).then(function(r) { return r.json(); }).then(function(d) {
+      if (d.ok) {
+        form.innerHTML = '<p style="text-align:center;color:var(--gold);font-size:1.2rem;padding:40px 0">Thanks, ' + name.split(' ')[0] + '! We\'ll reach out within 24 hours to confirm your booking.</p>';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Request Booking';
+        alert('Something went wrong. Please call us directly.');
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Request Booking';
+      alert('Connection error. Please call us directly.');
+    });
+  });
+})();
+</script>
 </body>
 </html>
