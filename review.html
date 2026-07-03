@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Star Light Cafe | Share Your Experience</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=erode@400,600,700&f[]=synonym@400,600,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+
+:root {
+  --font-h: 'Erode', Georgia, serif;
+  --font-b: 'Synonym', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bg: #0a0a10;
+  --surface: rgba(255,255,255,0.05);
+  --surface-border: rgba(255,255,255,0.08);
+  --gold: #D4A547;
+  --gold-lt: #E8C478;
+  --gold-dim: rgba(212,165,71,0.18);
+  --red: #C44536;
+  --red-hover: #D55545;
+  --herb: #6B9B6E;
+  --herb-dim: rgba(107,155,110,0.15);
+  --white: #F0EDE6;
+  --gray: rgba(240,237,230,0.62);
+  --gray-dim: rgba(240,237,230,0.32);
+}
+
+body {
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand {
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out forwards;
+}
+.brand img {
+  height: 72px;
+  width: auto;
+  margin: 0 auto 8px;
+  display: block;
+}
+.brand-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  border: none;
+  border-radius: 1px;
+  margin: 12px auto 0;
+}
+
+.greeting {
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.15s ease-out forwards;
+}
+.greeting h2 {
+  font-family: var(--font-h);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.greeting p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+.discount-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  width: 100%;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.3s ease-out forwards;
+}
+.discount-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.discount-icon svg { width: 22px; height: 22px; }
+.discount-text strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.2;
+}
+.discount-text span {
+  font-size: 0.78rem;
+  color: var(--gray);
+  line-height: 1.4;
+}
+
+.rating-section {
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.45s ease-out forwards;
+}
+.rating-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.star {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.star:active { transform: scale(0.88); }
+.star svg {
+  width: 48px;
+  height: 48px;
+  transition: all 0.2s ease;
+}
+.star svg .star-fill {
+  fill: var(--gray-dim);
+  transition: fill 0.2s ease;
+}
+.star.active svg .star-fill {
+  fill: var(--gold);
+}
+.star.active svg {
+  filter: drop-shadow(0 0 10px rgba(212,165,71,0.4));
+}
+
+.panel {
+  width: 100%;
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+}
+.panel.visible {
+  display: block;
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
+.panel-high { text-align: center; }
+.panel-high h3 {
+  font-family: var(--font-h);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.panel-high p {
+  font-size: 0.88rem;
+  color: var(--gray);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  background: #fff;
+  color: #1A1A1A;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-b);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.btn-google:active { transform: scale(0.97); }
+.btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+.panel-low h3 {
+  font-family: var(--font-h);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.panel-low > p {
+  font-size: 0.88rem;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.feedback-form { display: flex; flex-direction: column; gap: 14px; }
+.feedback-form textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  color: var(--white);
+  font-family: var(--font-b);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.feedback-form textarea::placeholder { color: var(--gray-dim); }
+.feedback-form textarea:focus { border-color: var(--gold); }
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-b);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn-submit:active { transform: scale(0.97); background: var(--red-hover); }
+.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.panel-thanks { text-align: center; }
+.thanks-check {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--herb-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.thanks-check svg { width: 28px; height: 28px; }
+.panel-thanks h3 {
+  font-family: var(--font-h);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.panel-thanks p {
+  font-size: 0.88rem;
+  color: var(--gray);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.coupon {
+  border: 2px dashed var(--gold-dim);
+  border-radius: 12px;
+  padding: 20px;
+  background: rgba(212,165,71,0.05);
+}
+.coupon-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.coupon-code {
+  font-family: var(--font-h);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+.coupon-detail {
+  font-size: 0.78rem;
+  color: var(--gray-dim);
+  margin-top: 8px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="brand">
+    <img src="assets/img/logo-200.png" alt="Star Light Cafe" width="200" height="auto">
+    <hr class="brand-rule">
+  </div>
+
+  <div class="greeting" id="greeting">
+    <h2>Thanks for hanging with us</h2>
+    <p>Your feedback helps us keep the vibe right.</p>
+  </div>
+
+  <div class="discount-badge" id="discountBadge">
+    <div class="discount-icon">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" fill="#D4A547"/>
+      </svg>
+    </div>
+    <div class="discount-text">
+      <strong>$5 off your next visit</strong>
+      <span>Share your experience and save</span>
+    </div>
+  </div>
+
+  <div class="rating-section" id="ratingSection">
+    <div class="rating-label">How was your experience?</div>
+    <div class="stars" id="stars">
+      <div class="star" data-value="1">
+        <svg viewBox="0 0 24 24"><path class="star-fill" d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z"/></svg>
+      </div>
+      <div class="star" data-value="2">
+        <svg viewBox="0 0 24 24"><path class="star-fill" d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z"/></svg>
+      </div>
+      <div class="star" data-value="3">
+        <svg viewBox="0 0 24 24"><path class="star-fill" d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z"/></svg>
+      </div>
+      <div class="star" data-value="4">
+        <svg viewBox="0 0 24 24"><path class="star-fill" d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z"/></svg>
+      </div>
+      <div class="star" data-value="5">
+        <svg viewBox="0 0 24 24"><path class="star-fill" d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4-5 Stars: Redirect to Google -->
+  <div class="panel panel-high" id="panelHigh">
+    <h3>We love hearing that!</h3>
+    <p>Would you take a moment to share your experience on Google? It means everything to our team.</p>
+    <a href="https://g.page/r/Cbj3St_AaldPEBM/review" target="_blank" rel="noopener" class="btn-google" id="btnGoogle">
+      <svg viewBox="0 0 24 24">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 001 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      <span>Leave us a Google Review</span>
+    </a>
+  </div>
+
+  <!-- 1-3 Stars: Private Feedback -->
+  <div class="panel panel-low" id="panelLow">
+    <h3>We're sorry about that</h3>
+    <p>Your experience matters to us. Help us understand what went wrong so we can make it right.</p>
+    <form class="feedback-form" id="feedbackForm">
+      <textarea id="feedbackText" placeholder="What could we have done better?" required></textarea>
+      <button type="submit" class="btn-submit" id="btnSubmit" disabled>Send Private Feedback</button>
+    </form>
+  </div>
+
+  <!-- Thank You + Discount Code -->
+  <div class="panel panel-thanks" id="panelThanks">
+    <div class="thanks-check">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="#6B9B6E"/>
+      </svg>
+    </div>
+    <h3 id="thanksHeading">Thank you for your feedback</h3>
+    <p id="thanksMessage">Your feedback goes directly to our manager. We'll work on it.</p>
+    <div class="coupon">
+      <div class="coupon-label">Your discount code</div>
+      <div class="coupon-code">STARLIGHT5</div>
+      <div class="coupon-detail">Show this to your server on your next visit</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var selectedRating = 0;
+  var stars = document.querySelectorAll('.star');
+  var panelHigh = document.getElementById('panelHigh');
+  var panelLow = document.getElementById('panelLow');
+  var panelThanks = document.getElementById('panelThanks');
+  var ratingSection = document.getElementById('ratingSection');
+  var greeting = document.getElementById('greeting');
+  var discountBadge = document.getElementById('discountBadge');
+  var feedbackForm = document.getElementById('feedbackForm');
+  var feedbackText = document.getElementById('feedbackText');
+  var btnSubmit = document.getElementById('btnSubmit');
+  var btnGoogle = document.getElementById('btnGoogle');
+
+  stars.forEach(function(star) {
+    star.addEventListener('click', function() {
+      var value = parseInt(this.getAttribute('data-value'));
+      if (selectedRating === value) return;
+      selectedRating = value;
+
+      stars.forEach(function(s) {
+        var v = parseInt(s.getAttribute('data-value'));
+        s.classList.toggle('active', v <= value);
+      });
+
+      panelHigh.classList.remove('visible');
+      panelLow.classList.remove('visible');
+      panelThanks.classList.remove('visible');
+
+      setTimeout(function() {
+        if (value >= 4) {
+          panelHigh.classList.add('visible');
+        } else {
+          panelLow.classList.add('visible');
+          feedbackText.focus();
+        }
+      }, 350);
+    });
+  });
+
+  feedbackText.addEventListener('input', function() {
+    btnSubmit.disabled = this.value.trim().length < 5;
+  });
+
+  feedbackForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var feedback = feedbackText.value.trim();
+    if (feedback.length < 5) return;
+
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Sending...';
+
+    var entry = {
+      rating: selectedRating,
+      feedback: feedback,
+      timestamp: new Date().toISOString(),
+      page: 'starlight-cafe'
+    };
+
+    try {
+      var stored = JSON.parse(localStorage.getItem('starlight_feedback') || '[]');
+      stored.push(entry);
+      localStorage.setItem('starlight_feedback', JSON.stringify(stored));
+    } catch(err) {}
+
+    setTimeout(function() {
+      panelLow.classList.remove('visible');
+      greeting.style.display = 'none';
+      discountBadge.style.display = 'none';
+      ratingSection.style.display = 'none';
+      setTimeout(function() {
+        panelThanks.classList.add('visible');
+      }, 200);
+    }, 800);
+  });
+
+  btnGoogle.addEventListener('click', function() {
+    setTimeout(function() {
+      panelHigh.classList.remove('visible');
+      greeting.style.display = 'none';
+      discountBadge.style.display = 'none';
+      ratingSection.style.display = 'none';
+
+      document.getElementById('thanksMessage').textContent =
+        'Thank you for sharing your experience on Google. It helps our community find us.';
+
+      setTimeout(function() {
+        panelThanks.classList.add('visible');
+      }, 200);
+    }, 500);
+  });
+})();
+</script>
+</body>
+</html>
