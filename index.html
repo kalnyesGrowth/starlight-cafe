@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Star Light Cafe | Hookah Lounge in Woodbridge, VA</title>
   <meta name="description" content="Woodbridge's premier hookah lounge. Premium Al Fakher and Starbuzz shisha, handcrafted drinks, pool tables, and the best vibe in town. Open daily from 5 PM. 14834 Buildamerica Dr, Woodbridge VA. Call (703) 494-1004.">
   <meta name="keywords" content="hookah lounge Woodbridge VA, shisha bar Woodbridge, hookah bar near me, Star Light Cafe, hookah Woodbridge Virginia, best hookah lounge Prince William County, Al Fakher hookah, Starbuzz hookah, hookah bar 22191, lounge near Woodbridge">
   <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; img-src 'self' https: data:; font-src 'self' https://cdn.fontshare.com data:; style-src 'self' 'unsafe-inline' https://api.fontshare.com; connect-src 'self' https://boddsbxlaytcrkpuckyn.supabase.co; script-src 'self' 'unsafe-inline' https://project-kday6.vercel.app; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta name="author" content="Star Light Cafe Hookah Bar">
   <link rel="canonical" href="https://starlight-cafe.com/">
 
@@ -125,15 +128,15 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); }
-    body {
+    html { overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); overscroll-behavior: none; }
+    body { overflow-x: hidden;
       font-family: var(--font-b);
       background: var(--bg);
       color: var(--white);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
       font-size: var(--text-base);
+      overscroll-behavior: none;
     }
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
@@ -196,11 +199,15 @@
       width: 100%; height: 100vh;
       z-index: 1; overflow: hidden;
       background: #000;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     .video-stage canvas {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
+      will-change: transform;
     }
     .video-overlay {
       position: absolute; inset: 0;
@@ -239,6 +246,9 @@
       opacity: 0;
       transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
+      will-change: opacity, transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     .text-panel.from-left {
       left: 60px; bottom: 80px;
@@ -1407,11 +1417,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="b-name">Your Name</label>
-          <input type="text" id="b-name" name="name" required autocomplete="name">
+          <input type="text" id="b-name" name="name" required autocomplete="name" maxlength="100" pattern="[A-Za-zÀ-ÿ\s'.\\-]{1,100}">
         </div>
         <div class="form-group">
           <label for="b-phone">Phone</label>
-          <input type="tel" id="b-phone" name="phone" required autocomplete="tel">
+          <input type="tel" id="b-phone" name="phone" required autocomplete="tel" maxlength="20" pattern="[0-9+()\\s\\-]{7,20}">
         </div>
       </div>
       <div class="form-row">
@@ -1432,7 +1442,7 @@
       </div>
       <div class="form-group">
         <label for="b-notes">Anything we should know?</label>
-        <textarea id="b-notes" name="notes" rows="3" placeholder="Birthday, watch party, special requests..."></textarea>
+        <textarea id="b-notes" name="notes" rows="3" maxlength="500" placeholder="Birthday, watch party, special requests..."></textarea>
       </div>
       <button type="submit" class="form-submit">Request Booking</button>
       <p class="form-note">We'll call or text you to confirm within 24 hours.</p>
@@ -1818,67 +1828,96 @@
 
   function loadFrames() {
     var loaded = 0;
-    for (var i = 0; i < TOTAL_FRAMES; i++) {
-      (function(idx) {
-        var img = new Image();
-        var num = String(idx + 1).padStart(4, '0');
-        img.src = FRAME_DIR + '/f_' + num + '.jpg';
-        img.onload = function() {
-          frames[idx] = img;
-          loaded++;
-          if (loadPct) loadPct.textContent = Math.round((loaded / TOTAL_FRAMES) * 100);
-          if (idx === 0 && !framesReady) { drawFrame(0); }
-          if (loaded >= 20 && !framesReady) {
-            framesReady = true;
-            update();
-          }
-          if (loaded === TOTAL_FRAMES) {
-            if (loader) loader.classList.add('hidden');
-            if (!framesReady) { framesReady = true; }
-            update();
-          }
-        };
-        img.onerror = function() {
-          loaded++;
-          if (loaded === TOTAL_FRAMES) {
-            if (loader) loader.classList.add('hidden');
-            if (!framesReady) { framesReady = true; }
-            update();
-          }
-        };
-      })(i);
+    var BATCH = 30;
+    function loadBatch(start) {
+      var end = Math.min(start + BATCH, TOTAL_FRAMES);
+      var batchDone = 0;
+      var batchSize = end - start;
+      for (var i = start; i < end; i++) {
+        (function(idx) {
+          var img = new Image();
+          var num = String(idx + 1).padStart(4, '0');
+          img.src = FRAME_DIR + '/f_' + num + '.jpg';
+          img.onload = function() {
+            frames[idx] = img;
+            loaded++;
+            batchDone++;
+            if (loadPct) loadPct.textContent = Math.round((loaded / TOTAL_FRAMES) * 100);
+            if (idx === 0 && !framesReady) { drawFrame(0); }
+            if (loaded >= 20 && !framesReady) {
+              framesReady = true;
+              update();
+            }
+            if (loaded === TOTAL_FRAMES) {
+              if (loader) loader.classList.add('hidden');
+              if (!framesReady) { framesReady = true; }
+              update();
+            }
+            if (batchDone === batchSize && end < TOTAL_FRAMES) {
+              loadBatch(end);
+            }
+          };
+          img.onerror = function() {
+            loaded++;
+            batchDone++;
+            if (loaded === TOTAL_FRAMES) {
+              if (loader) loader.classList.add('hidden');
+              if (!framesReady) { framesReady = true; }
+              update();
+            }
+            if (batchDone === batchSize && end < TOTAL_FRAMES) {
+              loadBatch(end);
+            }
+          };
+        })(i);
+      }
     }
+    loadBatch(0);
   }
 
+  var lastFrameTime = 0;
   function drawFrame(exact) {
     var idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.floor(exact)));
-    var next = Math.min(TOTAL_FRAMES - 1, idx + 1);
-    var blend = exact - idx;
-    if (idx === lastDrawn && blend < 0.01) return;
+    if (idx === lastDrawn) return;
     if (!frames[idx]) return;
     lastDrawn = idx;
     ctx.globalAlpha = 1;
     ctx.drawImage(frames[idx], 0, 0, FRAME_W, FRAME_H);
-    if (blend > 0.01 && frames[next] && next !== idx) {
-      ctx.globalAlpha = blend;
-      ctx.drawImage(frames[next], 0, 0, FRAME_W, FRAME_H);
-      ctx.globalAlpha = 1;
+    var now = performance.now();
+    var delta = now - lastFrameTime;
+    lastFrameTime = now;
+    if (delta > 24) {
+      var next = Math.min(TOTAL_FRAMES - 1, idx + 1);
+      var blend = exact - idx;
+      if (blend > 0.15 && frames[next] && next !== idx) {
+        ctx.globalAlpha = blend;
+        ctx.drawImage(frames[next], 0, 0, FRAME_W, FRAME_H);
+        ctx.globalAlpha = 1;
+      }
     }
   }
 
   var ticking = false;
+  var wasPastScroll = false;
   function update() {
-    if (!framesReady) return;
+    if (!framesReady) { ticking = false; return; }
     var trackRect = scrollTrack.getBoundingClientRect();
     var trackTop = window.scrollY + trackRect.top;
     var trackH = trackRect.height - window.innerHeight;
     var scrolled = window.scrollY - trackTop;
     var progress = Math.max(0, Math.min(1, scrolled / trackH));
+    var pastScroll = window.scrollY > trackTop + trackH;
+
+    nav.classList.toggle('scrolled', pastScroll || window.scrollY > 60);
+
+    if (pastScroll && wasPastScroll) {
+      ticking = false;
+      return;
+    }
+    wasPastScroll = pastScroll;
 
     var frameExact = progress * (TOTAL_FRAMES - 1);
     drawFrame(frameExact);
-
-    var pastScroll = window.scrollY > trackTop + trackH;
 
     panels.forEach(function(p) {
       var range = p.dataset.range.split(',').map(Number);
@@ -1908,8 +1947,6 @@
       scrollProgress.style.opacity = pastScroll ? '0' : '1';
     }
 
-    nav.classList.toggle('scrolled', pastScroll || window.scrollY > 60);
-
     ticking = false;
   }
 
@@ -1918,7 +1955,7 @@
       requestAnimationFrame(update);
       ticking = true;
     }
-  });
+  }, { passive: true });
 
   loadFrames();
 
@@ -1929,6 +1966,8 @@
     var particles = [];
     var maxP = window.innerWidth < 768 ? 40 : 80;
     var expSection = document.getElementById('experience');
+    var smokeVisible = false;
+    var smokeRafId = null;
 
     function sizeSmoke(){
       smokeCanvas.width = expSection.offsetWidth;
@@ -1936,6 +1975,16 @@
     }
     sizeSmoke();
     window.addEventListener('resize', sizeSmoke);
+
+    if ('IntersectionObserver' in window) {
+      var smokeObs = new IntersectionObserver(function(entries) {
+        smokeVisible = entries[0].isIntersecting;
+        if (smokeVisible && !smokeRafId) animateSmoke();
+      }, { rootMargin: '100px' });
+      smokeObs.observe(expSection);
+    } else {
+      smokeVisible = true;
+    }
 
     function getScrollProgress(){
       var rect = expSection.getBoundingClientRect();
@@ -1959,6 +2008,7 @@
     }
 
     function animateSmoke(){
+      if (!smokeVisible) { smokeRafId = null; return; }
       var progress = getScrollProgress();
       sCtx.clearRect(0,0,smokeCanvas.width,smokeCanvas.height);
 
@@ -1990,7 +2040,7 @@
         sCtx.restore();
       }
 
-      requestAnimationFrame(animateSmoke);
+      smokeRafId = requestAnimationFrame(animateSmoke);
     }
     animateSmoke();
   }
@@ -2014,8 +2064,12 @@
 (function(){
   var form = document.getElementById('bookingForm');
   if (!form) return;
+  var _lastBooking = 0;
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    var now = Date.now();
+    if (now - _lastBooking < 30000) { alert('Please wait 30 seconds before submitting again.'); return; }
+    _lastBooking = now;
     var btn = form.querySelector('.form-submit');
     btn.disabled = true;
     btn.textContent = 'Sending...';
@@ -2037,7 +2091,12 @@
       })
     }).then(function(r) { return r.json(); }).then(function(d) {
       if (d.ok) {
-        form.innerHTML = '<p style="text-align:center;color:var(--gold);font-size:1.2rem;padding:40px 0">Thanks, ' + name.split(' ')[0] + '! We\'ll reach out within 24 hours to confirm your booking.</p>';
+        var firstName = name.split(' ')[0];
+        var p = document.createElement('p');
+        p.style.cssText = 'text-align:center;color:var(--gold);font-size:1.2rem;padding:40px 0';
+        p.textContent = 'Thanks, ' + firstName + '! We\'ll reach out within 24 hours to confirm your booking.';
+        form.innerHTML = '';
+        form.appendChild(p);
       } else {
         btn.disabled = false;
         btn.textContent = 'Request Booking';
