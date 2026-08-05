@@ -587,12 +587,12 @@
     /* DRINKS */
     .drinks { background: transparent; }
     .drinks-grid {
-      display: flex; gap: 0;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
       background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden;
     }
-    .drink-category { flex: 1; }
-    .drink-category + .drink-category { border-left: 1px solid var(--border); }
+    .drink-category { border-right: 1px solid var(--border); }
+    .drink-category:last-child { border-right: none; }
     .drink-cat-header {
       padding: 20px 24px; border-bottom: 1px solid var(--border);
       text-align: center;
@@ -875,8 +875,9 @@
       .photo-strip { grid-template-columns: 1fr; gap: 10px; }
       .photo-strip-item { aspect-ratio: 16/9; }
       .menu-grid { grid-template-columns: 1fr; }
-      .drinks-grid { flex-direction: column; }
-      .drink-category + .drink-category { border-left: none; border-top: 1px solid var(--border); }
+      .drinks-grid { grid-template-columns: 1fr; }
+      .drink-category { border-right: none; border-bottom: 1px solid var(--border); }
+      .drink-category:last-child { border-bottom: none; }
       .hours-loc-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .mobile-sticky { display: block; }
@@ -1241,42 +1242,136 @@
   <div class="container">
     <div class="section-header">
       <span class="eyebrow">Drinks</span>
-      <h2>Handcrafted Refreshments</h2>
-      <p>Fresh juices, smoothies, and our signature Moroccan mint tea.</p>
+      <h2>Full Drink Menu</h2>
+      <p>Hot teas, fresh juices, sodas, energy drinks, and Middle Eastern specialties.</p>
     </div>
 
     <div class="drinks-grid">
       <div class="drink-category">
         <div class="drink-cat-header">
-          <h3>Juices</h3>
+          <h3>Hot Drinks</h3>
         </div>
         <div class="drink-item">
-          <span class="d-name">Mango</span>
+          <span class="d-name">Cup Hot Tea</span>
+          <span class="d-price">$1.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Teapot</span>
+          <span class="d-price">$3.50</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Coffee</span>
+          <span class="d-price">$3.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Primo Cappuccino</span>
+          <span class="d-price">$4.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Black Tea Mix Spicy</span>
+          <span class="d-price">$4.25</span>
+        </div>
+      </div>
+
+      <div class="drink-category">
+        <div class="drink-cat-header">
+          <h3>Sodas</h3>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Can Soda 12oz</span>
+          <span class="d-price">$1.49</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Mini Can Soda 7.5oz</span>
+          <span class="d-price">$0.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Coca Cola</span>
+          <span class="d-price">$2.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Fanta</span>
+          <span class="d-price">$2.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Sunkist</span>
+          <span class="d-price">$2.99</span>
+        </div>
+      </div>
+
+      <div class="drink-category">
+        <div class="drink-cat-header">
+          <h3>Juices &amp; Refreshments</h3>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Mango Juice</span>
+          <span class="d-price">$4.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Calypso</span>
+          <span class="d-price">$3.00</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Oldtyme</span>
+          <span class="d-price">$3.00</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Ever Fresh</span>
+          <span class="d-price">$2.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Farooz 330ml</span>
+          <span class="d-price">$2.50</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Slushy</span>
+          <span class="d-price">$3.00</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Water</span>
+          <span class="d-price">$1.45</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Perrier</span>
+          <span class="d-price">$1.49</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Fair Life</span>
           <span class="d-price">$3.50</span>
         </div>
       </div>
 
       <div class="drink-category">
         <div class="drink-cat-header">
-          <h3>Smoothies</h3>
+          <h3>Energy &amp; Specialty</h3>
         </div>
         <div class="drink-item">
-          <span class="d-name">Strawberry</span>
-          <span class="d-price">$3.99</span>
+          <span class="d-name">Red Bull</span>
+          <span class="d-price">$5.29</span>
         </div>
         <div class="drink-item">
-          <span class="d-name">Mixed Berry</span>
-          <span class="d-price">$4.50</span>
-        </div>
-      </div>
-
-      <div class="drink-category">
-        <div class="drink-cat-header">
-          <h3>Hot Drinks</h3>
+          <span class="d-name">Energy Drinks</span>
+          <span class="d-price">$3.50</span>
         </div>
         <div class="drink-item">
-          <span class="d-name">Moroccan Mint Tea</span>
+          <span class="d-name">Arizona</span>
+          <span class="d-price">$2.49</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Laziza</span>
           <span class="d-price">$4.25</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Birell</span>
+          <span class="d-price">$2.99</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Mang Fru Top</span>
+          <span class="d-price">$1.00</span>
+        </div>
+        <div class="drink-item">
+          <span class="d-name">Ice Cream Finus</span>
+          <span class="d-price">$2.99</span>
         </div>
       </div>
     </div>
@@ -1379,7 +1474,7 @@
     </div>
 
     <div class="review-cta">
-      <a href="https://search.google.com/local/writereview?placeid=ChIJ0bNkXnxftiMRAAAAAAAAAA" target="_blank">
+      <a href="https://g.page/r/Cbj3St_AaldPEBM/review" target="_blank">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
         Leave a Review on Google
       </a>
