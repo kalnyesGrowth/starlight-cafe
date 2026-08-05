@@ -36,7 +36,7 @@
       {
         "@type": ["BarOrPub", "LocalBusiness"],
         "name": "Star Light Cafe Hookah Bar",
-        "description": "Premium hookah lounge in Woodbridge, VA featuring Al Fakher and Starbuzz shisha, Moroccan mint tea, juices, smoothies, pool tables, and a relaxing atmosphere.",
+        "description": "Premium hookah lounge in Woodbridge, VA featuring Al Fakher and Starbuzz shisha, hot tea, juices, coffee, pool tables, and a relaxing atmosphere.",
         "telephone": "(703) 494-1004",
         "url": "https://starlight-cafe.com",
         "address": {
@@ -81,7 +81,7 @@
         "@type": "FAQPage",
         "mainEntity": [
           {"@type":"Question","name":"How old do you have to be?","acceptedAnswer":{"@type":"Answer","text":"You must be 21 years or older with a valid ID to enter Star Light Cafe, per federal tobacco law."}},
-          {"@type":"Question","name":"Can I bring my own food?","acceptedAnswer":{"@type":"Answer","text":"Yes. Outside food is welcome. Outside drinks are not allowed, but we have fresh juices, smoothies, and Moroccan mint tea."}},
+          {"@type":"Question","name":"Can I bring my own food?","acceptedAnswer":{"@type":"Answer","text":"Yes. Outside food is welcome. Outside drinks are not allowed, but we have fresh juices, hot tea, coffee, and energy drinks."}},
           {"@type":"Question","name":"What hookah brands do you carry?","acceptedAnswer":{"@type":"Answer","text":"We carry Al Fakher (11 flavors) and Starbuzz (9 flavors)."}},
           {"@type":"Question","name":"How much does hookah cost?","acceptedAnswer":{"@type":"Answer","text":"Hookah is $26+tax per device for 1-2 people. Both Al Fakher and Starbuzz are the same price. Each additional person sharing the same device is +$5. All refills are $15+tax."}},
           {"@type":"Question","name":"Do you have Wi-Fi?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free Wi-Fi for all customers."}},
@@ -143,7 +143,7 @@
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
     .section-pad { padding: 80px 0; }
     .eyebrow {
       font-family: var(--font-b);
@@ -530,7 +530,8 @@
     }
 
     /* MENU */
-    .menu-section { background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .menu-section { background: url('assets/img/bg/smoke-texture-3.jpg') center/cover no-repeat fixed; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
+    .menu-section::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,16,0.88); }
     .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .brand-card {
       background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
@@ -613,7 +614,8 @@
     .drink-item .d-price { color: var(--white); font-weight: 600; font-family: var(--font-h); }
 
     /* REVIEWS */
-    .reviews { background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .reviews { background: url('assets/img/bg/smoke-texture-2.jpg') center/cover no-repeat fixed; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
+    .reviews::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,16,0.85); }
     .reviews-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 16px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
     .reviews-scroll::-webkit-scrollbar { height: 4px; }
     .reviews-scroll::-webkit-scrollbar-track { background: var(--card); border-radius: 4px; }
@@ -692,7 +694,8 @@
     }
 
     /* FAQ */
-    .faq { background: rgba(0,0,0,0.15); border-top: 1px solid var(--border); }
+    .faq { background: url('assets/img/bg/smoke-texture-4.jpg') center/cover no-repeat fixed; border-top: 1px solid var(--border); position: relative; }
+    .faq::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,16,0.85); }
     .faq-list { max-width: 720px; margin: 0 auto; }
     .faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; }
     .faq-q {
@@ -770,7 +773,8 @@
     .age-disclaimer strong { color: var(--white); }
 
     /* BOOKING FORM */
-    .booking-section { background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .booking-section { background: url('assets/img/bg/smoke-texture-1.jpg') center/cover no-repeat fixed; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
+    .booking-section::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,16,0.88); }
     .booking-form {
       max-width: 600px; margin: 0 auto;
       background: var(--card); border: 1px solid var(--border);
@@ -815,7 +819,8 @@
     }
 
     /* VIBE SECTION */
-    .vibe-section { background: rgba(0,0,0,0.15); border-top: 1px solid var(--border); }
+    .vibe-section { background: url('assets/img/bg/smoke-texture-1.jpg') center/cover no-repeat fixed; border-top: 1px solid var(--border); position: relative; }
+    .vibe-section::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,16,0.9); }
     .vibe-img-wrap {
       border-radius: var(--radius); overflow: hidden;
       border: 1px solid var(--border);
@@ -947,6 +952,7 @@
     <div class="nav-links">
       <a href="#experience">Experience</a>
       <a href="#menu">Menu</a>
+      <a href="#drinks">Drinks</a>
       <a href="#reviews">Reviews</a>
       <a href="#location">Visit</a>
       <a href="/about/">About</a>
@@ -968,6 +974,7 @@
   <div class="m-close" onclick="this.parentElement.classList.remove('open')">&times;</div>
   <a href="#experience" onclick="this.parentElement.classList.remove('open')">Experience</a>
   <a href="#menu" onclick="this.parentElement.classList.remove('open')">Menu</a>
+  <a href="#drinks" onclick="this.parentElement.classList.remove('open')">Drinks</a>
   <a href="#reviews" onclick="this.parentElement.classList.remove('open')">Reviews</a>
   <a href="#booking" onclick="this.parentElement.classList.remove('open')">Book</a>
   <a href="#location" onclick="this.parentElement.classList.remove('open')">Visit</a>
@@ -997,7 +1004,7 @@
 <div class="text-panel from-right" id="panel-2" data-range="0.38,0.58">
   <div class="text-eyebrow">Premium Selection</div>
   <h2 class="text-headline">Al Fakher. Starbuzz. Crafted drinks.</h2>
-  <p class="text-desc">20 premium hookah flavors across two world-class brands, Moroccan mint tea, fresh juices, smoothies, and a full drink menu. Every session, curated.</p>
+  <p class="text-desc">20 premium hookah flavors across two world-class brands, hot tea, fresh juices, coffee, and a full drink menu. Every session, curated.</p>
 </div>
 
 <div class="text-panel from-left-mid" id="panel-3" data-range="0.58,0.78">
@@ -1056,7 +1063,7 @@
   <div class="marquee-track">
     <div class="marquee-item">Al Fakher</div>
     <div class="marquee-item">Starbuzz</div>
-    <div class="marquee-item">Moroccan Mint Tea</div>
+    <div class="marquee-item">Hot Tea &amp; Coffee</div>
     <div class="marquee-item">Pool Tables</div>
     <div class="marquee-item">Free Wi-Fi</div>
     <div class="marquee-item">Open Late</div>
@@ -1064,7 +1071,7 @@
     <div class="marquee-item">BYOF Friendly</div>
     <div class="marquee-item">Al Fakher</div>
     <div class="marquee-item">Starbuzz</div>
-    <div class="marquee-item">Moroccan Mint Tea</div>
+    <div class="marquee-item">Hot Tea &amp; Coffee</div>
     <div class="marquee-item">Pool Tables</div>
     <div class="marquee-item">Free Wi-Fi</div>
     <div class="marquee-item">Open Late</div>
@@ -1121,7 +1128,7 @@
             <div class="exp-hl-marker"></div>
             <div>
               <strong>Bring Your Food</strong>
-              <span>Outside food welcome. Pair dinner with hookah and Moroccan tea.</span>
+              <span>Outside food welcome. Pair dinner with hookah and hot tea.</span>
             </div>
           </div>
         </div>
@@ -1233,6 +1240,58 @@
     </div>
   </div>
 </section>
+
+<!-- DRINKS -->
+<section id="drinks" class="drinks section-pad">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Drink Menu</span>
+      <h2>Sip While You Smoke</h2>
+      <p>Hot tea, fresh juices, energy drinks, sodas, and more. No outside drinks allowed.</p>
+    </div>
+    <div class="drinks-grid">
+      <div class="drink-category">
+        <div class="drink-cat-header"><h3>Tea &amp; Coffee</h3></div>
+        <div class="drink-item"><span class="d-name">Teapot</span><span class="d-price">$3.50</span></div>
+        <div class="drink-item"><span class="d-name">Cup Hot Tea</span><span class="d-price">$1.99</span></div>
+        <div class="drink-item"><span class="d-name">Black Tea Mix Spicy</span><span class="d-price">$4.25</span></div>
+        <div class="drink-item"><span class="d-name">Coffee</span><span class="d-price">$3.99</span></div>
+        <div class="drink-item"><span class="d-name">Cappuccino</span><span class="d-price">$2.99</span></div>
+      </div>
+      <div class="drink-category">
+        <div class="drink-cat-header"><h3>Juices &amp; Drinks</h3></div>
+        <div class="drink-item"><span class="d-name">Mango Juice</span><span class="d-price">$4.99</span></div>
+        <div class="drink-item"><span class="d-name">Calypso</span><span class="d-price">$3.00</span></div>
+        <div class="drink-item"><span class="d-name">Oldtyme</span><span class="d-price">$3.00</span></div>
+        <div class="drink-item"><span class="d-name">Ever Fresh</span><span class="d-price">$2.99</span></div>
+        <div class="drink-item"><span class="d-name">Slushy</span><span class="d-price">$1.99</span></div>
+        <div class="drink-item"><span class="d-name">Mang Fru Top</span><span class="d-price">$1.00</span></div>
+      </div>
+      <div class="drink-category">
+        <div class="drink-cat-header"><h3>Sodas &amp; Water</h3></div>
+        <div class="drink-item"><span class="d-name">Can Soda 12oz</span><span class="d-price">$2.99</span></div>
+        <div class="drink-item"><span class="d-name">Mini Can Soda 7.5oz</span><span class="d-price">$0.99</span></div>
+        <div class="drink-item"><span class="d-name">Coca Cola</span><span class="d-price">$2.99</span></div>
+        <div class="drink-item"><span class="d-name">Fanta</span><span class="d-price">$2.50</span></div>
+        <div class="drink-item"><span class="d-name">Sunkist</span><span class="d-price">$3.00</span></div>
+        <div class="drink-item"><span class="d-name">Perrier</span><span class="d-price">$1.49</span></div>
+        <div class="drink-item"><span class="d-name">Water</span><span class="d-price">$1.45</span></div>
+      </div>
+      <div class="drink-category">
+        <div class="drink-cat-header"><h3>Energy &amp; Specialty</h3></div>
+        <div class="drink-item"><span class="d-name">Red Bull</span><span class="d-price">$5.29</span></div>
+        <div class="drink-item"><span class="d-name">Energy Drinks</span><span class="d-price">$3.50</span></div>
+        <div class="drink-item"><span class="d-name">Arizona</span><span class="d-price">$2.49</span></div>
+        <div class="drink-item"><span class="d-name">Fair Life</span><span class="d-price">$3.99</span></div>
+        <div class="drink-item"><span class="d-name">Farooz 330ml</span><span class="d-price">$3.50</span></div>
+        <div class="drink-item"><span class="d-name">Laziza</span><span class="d-price">$2.99</span></div>
+        <div class="drink-item"><span class="d-name">Birell</span><span class="d-price">$2.99</span></div>
+        <div class="drink-item"><span class="d-name">Ice Cream</span><span class="d-price">$2.99</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- REVIEWS -->
 <section id="reviews" class="reviews section-pad">
   <div class="container">
@@ -1478,7 +1537,7 @@
           Can I bring my own food?
           <span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a">Yes. Outside food is welcome. Bring dinner, snacks, whatever you like. Outside drinks are not allowed, but we have fresh juices, smoothies, and Moroccan mint tea.</div>
+        <div class="faq-a">Yes. Outside food is welcome. Bring dinner, snacks, whatever you like. Outside drinks are not allowed, but we have fresh juices, hot tea, coffee, and energy drinks.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
@@ -1557,6 +1616,7 @@
         <ul>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#menu">Menu</a></li>
+          <li><a href="#drinks">Drinks</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#location">Location</a></li>
           <li><a href="/about/">About</a></li>
