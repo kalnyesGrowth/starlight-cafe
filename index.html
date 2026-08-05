@@ -82,7 +82,7 @@
           {"@type":"Question","name":"How old do you have to be?","acceptedAnswer":{"@type":"Answer","text":"You must be 21 years or older with a valid ID to enter Star Light Cafe, per federal tobacco law."}},
           {"@type":"Question","name":"Can I bring my own food?","acceptedAnswer":{"@type":"Answer","text":"Yes. Outside food is welcome. Outside drinks are not allowed, but we have fresh juices, smoothies, and Moroccan mint tea."}},
           {"@type":"Question","name":"What hookah brands do you carry?","acceptedAnswer":{"@type":"Answer","text":"We carry Al Fakher (11 flavors) and Starbuzz (9 flavors)."}},
-          {"@type":"Question","name":"How much does hookah cost?","acceptedAnswer":{"@type":"Answer","text":"Al Fakher starts at $10+tax per person. Starbuzz starts at $15+tax per person. For two people sharing, both brands are $27+tax."}},
+          {"@type":"Question","name":"How much does hookah cost?","acceptedAnswer":{"@type":"Answer","text":"Hookah is $26+tax per device for 1-2 people. Both Al Fakher and Starbuzz are the same price. Each additional person sharing the same device is +$5. All refills are $15+tax."}},
           {"@type":"Question","name":"Do you have Wi-Fi?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free Wi-Fi for all customers."}},
           {"@type":"Question","name":"What are your hours?","acceptedAnswer":{"@type":"Answer","text":"Tuesday through Saturday: 5 PM to 1 AM. Sunday and Monday: 6 PM to 12 AM."}},
           {"@type":"Question","name":"Do I need a reservation?","acceptedAnswer":{"@type":"Answer","text":"No reservation needed. Walk-ins are always welcome. For large groups on Friday or Saturday nights, calling ahead is a good idea."}}
@@ -948,6 +948,8 @@
       <a href="#menu">Menu</a>
       <a href="#reviews">Reviews</a>
       <a href="#location">Visit</a>
+      <a href="/about/">About</a>
+      <a href="/blog/">Blog</a>
     </div>
     <a href="tel:+17034941004" class="nav-phone">
       <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>
@@ -968,6 +970,8 @@
   <a href="#reviews" onclick="this.parentElement.classList.remove('open')">Reviews</a>
   <a href="#booking" onclick="this.parentElement.classList.remove('open')">Book</a>
   <a href="#location" onclick="this.parentElement.classList.remove('open')">Visit</a>
+  <a href="/about/" onclick="this.parentElement.classList.remove('open')">About</a>
+  <a href="/blog/" onclick="this.parentElement.classList.remove('open')">Blog</a>
   <a href="tel:+17034941004" class="m-call">Call (703) 494-1004</a>
 </div>
 
@@ -1204,25 +1208,17 @@
 
     <div class="pricing-table">
       <div class="pricing-header">Shisha Pricing</div>
-      <div class="pricing-row">
-        <span class="item-name">Hookah (Al Fakher) per person</span>
-        <span class="item-price">$10+tax</span>
+      <div class="pricing-row highlight">
+        <span class="item-name">Hookah (1-2 people, one device)</span>
+        <span class="item-price">$26+tax</span>
       </div>
       <div class="pricing-row">
-        <span class="item-name">Hookah (Starbuzz) per person</span>
-        <span class="item-price">$15+tax</span>
+        <span class="item-name">Each additional person (same device)</span>
+        <span class="item-price">+$5</span>
       </div>
       <div class="pricing-row">
         <span class="item-name">Refill</span>
         <span class="item-price">$15+tax</span>
-      </div>
-      <div class="pricing-row highlight">
-        <span class="item-name">Al Fakher for 2 People</span>
-        <span class="item-price">$27+tax</span>
-      </div>
-      <div class="pricing-row highlight">
-        <span class="item-name">Starbuzz for 2 People</span>
-        <span class="item-price">$27+tax</span>
       </div>
       <div class="pricing-row">
         <span class="item-name">Disposable Hose</span>
@@ -1236,148 +1232,6 @@
     </div>
   </div>
 </section>
-
-<!-- DRINKS -->
-<section id="drinks" class="drinks section-pad">
-  <div class="container">
-    <div class="section-header">
-      <span class="eyebrow">Drinks</span>
-      <h2>Full Drink Menu</h2>
-      <p>Hot teas, fresh juices, sodas, energy drinks, and Middle Eastern specialties.</p>
-    </div>
-
-    <div class="drinks-grid">
-      <div class="drink-category">
-        <div class="drink-cat-header">
-          <h3>Hot Drinks</h3>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Cup Hot Tea</span>
-          <span class="d-price">$1.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Teapot</span>
-          <span class="d-price">$3.50</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Coffee</span>
-          <span class="d-price">$3.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Primo Cappuccino</span>
-          <span class="d-price">$4.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Black Tea Mix Spicy</span>
-          <span class="d-price">$4.25</span>
-        </div>
-      </div>
-
-      <div class="drink-category">
-        <div class="drink-cat-header">
-          <h3>Sodas</h3>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Can Soda 12oz</span>
-          <span class="d-price">$1.49</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Mini Can Soda 7.5oz</span>
-          <span class="d-price">$0.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Coca Cola</span>
-          <span class="d-price">$2.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Fanta</span>
-          <span class="d-price">$2.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Sunkist</span>
-          <span class="d-price">$2.99</span>
-        </div>
-      </div>
-
-      <div class="drink-category">
-        <div class="drink-cat-header">
-          <h3>Juices &amp; Refreshments</h3>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Mango Juice</span>
-          <span class="d-price">$4.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Calypso</span>
-          <span class="d-price">$3.00</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Oldtyme</span>
-          <span class="d-price">$3.00</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Ever Fresh</span>
-          <span class="d-price">$2.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Farooz 330ml</span>
-          <span class="d-price">$2.50</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Slushy</span>
-          <span class="d-price">$3.00</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Water</span>
-          <span class="d-price">$1.45</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Perrier</span>
-          <span class="d-price">$1.49</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Fair Life</span>
-          <span class="d-price">$3.50</span>
-        </div>
-      </div>
-
-      <div class="drink-category">
-        <div class="drink-cat-header">
-          <h3>Energy &amp; Specialty</h3>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Red Bull</span>
-          <span class="d-price">$5.29</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Energy Drinks</span>
-          <span class="d-price">$3.50</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Arizona</span>
-          <span class="d-price">$2.49</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Laziza</span>
-          <span class="d-price">$4.25</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Birell</span>
-          <span class="d-price">$2.99</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Mang Fru Top</span>
-          <span class="d-price">$1.00</span>
-        </div>
-        <div class="drink-item">
-          <span class="d-name">Ice Cream Finus</span>
-          <span class="d-price">$2.99</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- REVIEWS -->
 <section id="reviews" class="reviews section-pad">
   <div class="container">
@@ -1637,7 +1491,7 @@
           How much does hookah cost?
           <span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a">Al Fakher starts at $10+tax per person. Starbuzz starts at $15+tax per person. For two people sharing, both brands are $27+tax. Disposable hoses are $3 each.</div>
+        <div class="faq-a">Hookah is $26+tax per device for 1-2 people. Both Al Fakher and Starbuzz are the same price. Each additional person sharing the same device is +$5. All refills are $15+tax. Disposable hoses are $3 each.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
@@ -1702,9 +1556,10 @@
         <ul>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#menu">Menu</a></li>
-          <li><a href="#drinks">Drinks</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#location">Location</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1782,11 +1637,9 @@
       starbuzz: ['Blue Mist','White Mint','Gum','Sex on the Beach','Code69','Peach Mist','Irish Kiss','Melon Dew','Pan']
     },
     pricing: {
-      alFakherPP: '$10+tax',
-      starbuzzPP: '$15+tax',
+      hookahDevice: '$26+tax',
+      additionalPerson: '+$5',
       refill: '$15+tax',
-      alFakherFor2: '$27+tax',
-      starbuzzFor2: '$27+tax',
       disposableHose: '$3.00'
     }
   };
@@ -1818,6 +1671,7 @@
 
   if (isAgeVerified()) {
     ageGate.style.display = 'none';
+    document.body.style.overflow = '';
   } else {
     document.body.style.overflow = 'hidden';
     if (ageBtn) {

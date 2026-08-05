@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /frames/
+Disallow: /frames-mobile/
+
+Sitemap: https://starlight-cafe.com/sitemap.xml
