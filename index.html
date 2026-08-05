@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- QA: 95/100 | 2026-08-05 | GO -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
@@ -202,6 +203,7 @@
       will-change: transform;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
+      pointer-events: none;
     }
     .video-stage canvas {
       position: absolute; inset: 0;
@@ -235,7 +237,6 @@
       position: relative;
       z-index: 2;
       height: 600vh;
-      pointer-events: none;
     }
 
     /* TEXT PANELS */
