@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Star Light Cafe</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    @font-face { font-family: 'Erode'; src: url('assets/fonts/erode-700.woff2') format('woff2'); font-weight: 700; font-display: swap; font-style: normal; }
+    @font-face { font-family: 'Synonym'; src: url('assets/fonts/synonym-400.woff2') format('woff2'); font-weight: 400; font-display: swap; font-style: normal; }
+    @font-face { font-family: 'Synonym'; src: url('assets/fonts/synonym-700.woff2') format('woff2'); font-weight: 700; font-display: swap; font-style: normal; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; }
+    body {
+      font-family: 'Synonym', system-ui, sans-serif;
+      background: #0a0a10;
+      color: #F0EDE6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .wrap { max-width: 480px; }
+    .code {
+      font-family: 'Erode', Georgia, serif;
+      font-size: clamp(4rem, 12vw, 7rem);
+      font-weight: 700;
+      color: #D4A547;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'Erode', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 0.95rem;
+      color: rgba(240,237,230,0.62);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: 0.22s ease;
+    }
+    .btn-primary {
+      background: #D4A547;
+      color: #0a0a10;
+    }
+    .btn-primary:hover { background: #E8C478; }
+    .btn-secondary {
+      background: transparent;
+      color: rgba(240,237,230,0.62);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="code">404</div>
+    <h1>This page doesn't exist</h1>
+    <p>The page you're looking for may have been moved or removed. Head back to our homepage or give us a call.</p>
+    <div class="links">
+      <a href="/" class="btn btn-primary">Back to Homepage</a>
+      <a href="tel:+17034941004" class="btn btn-secondary">Call (703) 494-1004</a>
+    </div>
+  </div>
+</body>
+</html>
