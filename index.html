@@ -234,7 +234,7 @@
     .scroll-track {
       position: relative;
       z-index: 2;
-      height: 600vh;
+      height: 1800vh;
       pointer-events: none;
     }
 
@@ -983,7 +983,7 @@
   <a href="tel:+17034941004" class="m-call">Call (703) 494-1004</a>
 </div>
 
-<!-- SCROLL TRACK (600vh tall, drives frame scrubbing) -->
+<!-- SCROLL TRACK (1800vh tall, drives frame scrubbing) -->
 <div class="scroll-track" id="scrollTrack"></div>
 
 <!-- TEXT PANELS -->
@@ -1856,12 +1856,12 @@
             if (idx === 0 && !framesReady) { drawFrame(0); }
             if (loaded >= 20 && !framesReady) {
               framesReady = true;
-              update();
+              readScroll();
             }
             if (loaded === TOTAL_FRAMES) {
               if (loader) loader.classList.add('hidden');
               if (!framesReady) { framesReady = true; }
-              update();
+              readScroll();
             }
             if (batchDone === batchSize && end < TOTAL_FRAMES) {
               loadBatch(end);
@@ -1873,7 +1873,7 @@
             if (loaded === TOTAL_FRAMES) {
               if (loader) loader.classList.add('hidden');
               if (!framesReady) { framesReady = true; }
-              update();
+              readScroll();
             }
             if (batchDone === batchSize && end < TOTAL_FRAMES) {
               loadBatch(end);
@@ -1907,28 +1907,45 @@
     }
   }
 
-  var ticking = false;
-  var wasPastScroll = false;
-  function update() {
-    if (!framesReady) { ticking = false; return; }
+  var smoothFrame = 0;
+  var targetFrame = 0;
+  var curProgress = 0;
+  var curPastScroll = false;
+  var loopRunning = false;
+  var LERP = 0.07;
+
+  function readScroll() {
+    if (!framesReady) return;
     var trackRect = scrollTrack.getBoundingClientRect();
     var trackTop = window.scrollY + trackRect.top;
     var trackH = trackRect.height - window.innerHeight;
     var scrolled = window.scrollY - trackTop;
-    var progress = Math.max(0, Math.min(1, scrolled / trackH));
-    var pastScroll = window.scrollY > trackTop + trackH;
+    curProgress = Math.max(0, Math.min(1, scrolled / trackH));
+    curPastScroll = window.scrollY > trackTop + trackH;
+    targetFrame = curProgress * (TOTAL_FRAMES - 1);
 
-    nav.classList.toggle('scrolled', pastScroll || window.scrollY > 60);
+    nav.classList.toggle('scrolled', curPastScroll || window.scrollY > 60);
 
-    if (pastScroll && wasPastScroll) {
-      ticking = false;
-      return;
+    if (!loopRunning) {
+      loopRunning = true;
+      requestAnimationFrame(smoothLoop);
     }
-    wasPastScroll = pastScroll;
+  }
 
-    var frameExact = progress * (TOTAL_FRAMES - 1);
-    drawFrame(frameExact);
+  function smoothLoop() {
+    smoothFrame += (targetFrame - smoothFrame) * LERP;
+    if (Math.abs(smoothFrame - targetFrame) < 0.05) smoothFrame = targetFrame;
+    drawFrame(smoothFrame);
+    updatePanels(curProgress, curPastScroll);
 
+    if (Math.abs(smoothFrame - targetFrame) > 0.05) {
+      requestAnimationFrame(smoothLoop);
+    } else {
+      loopRunning = false;
+    }
+  }
+
+  function updatePanels(progress, pastScroll) {
     panels.forEach(function(p) {
       var range = p.dataset.range.split(',').map(Number);
       if (pastScroll) {
@@ -1956,15 +1973,10 @@
     if (scrollProgress) {
       scrollProgress.style.opacity = pastScroll ? '0' : '1';
     }
-
-    ticking = false;
   }
 
   window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(update);
-      ticking = true;
-    }
+    requestAnimationFrame(readScroll);
   }, { passive: true });
 
   loadFrames();
