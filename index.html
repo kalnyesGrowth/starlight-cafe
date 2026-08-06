@@ -532,29 +532,44 @@
     /* MENU */
     .menu-section { background: url('assets/img/bg/smoke-texture-3.jpg') center/cover no-repeat; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
     .menu-section::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,16,0.88); pointer-events: none; }
-    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .brand-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden;
+    .brand-row { margin-bottom: 40px; }
+    .brand-row-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
     }
-    .brand-header {
-      padding: 20px 24px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .brand-header h3 { font-family: var(--font-h); font-size: var(--text-lg); font-weight: 700; }
+    .brand-row-header h3 { font-family: var(--font-h); font-size: var(--text-lg); font-weight: 700; }
     .brand-badge {
       font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       padding: 4px 10px; border-radius: 4px;
       background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(212,165,71,0.2);
     }
-    .brand-flavors { padding: 24px; }
-    .flavor-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .flavor-tag {
-      font-size: 0.75rem; font-weight: 600; padding: 6px 14px; border-radius: 6px;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      color: var(--gray); transition: all var(--trans);
+    .product-carousel {
+      display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+      padding-bottom: 12px; -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin; scrollbar-color: rgba(212,165,71,0.3) transparent;
     }
-    .flavor-tag:hover { border-color: rgba(212,165,71,0.3); color: var(--gold); background: var(--gold-glow); }
+    .product-carousel::-webkit-scrollbar { height: 4px; }
+    .product-carousel::-webkit-scrollbar-track { background: transparent; }
+    .product-carousel::-webkit-scrollbar-thumb { background: rgba(212,165,71,0.3); border-radius: 4px; }
+    .product-card {
+      flex: 0 0 180px; scroll-snap-align: start;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: border-color var(--trans), transform var(--trans);
+    }
+    .product-card:hover { border-color: rgba(212,165,71,0.3); transform: translateY(-4px); }
+    .product-card-img {
+      width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      padding: 16px; background: linear-gradient(135deg, rgba(20,20,28,0.9), rgba(30,30,40,0.9));
+    }
+    .product-card-img img { width: 100%; height: 100%; object-fit: contain; }
+    .product-card-body { padding: 12px 14px; }
+    .product-card-name {
+      font-family: var(--font-h); font-size: 0.8rem; font-weight: 700; color: var(--white);
+      margin-bottom: 2px;
+    }
+    .product-card-brand {
+      font-size: 0.65rem; color: var(--gold); font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
 
     .pricing-table {
       margin-top: 32px; background: var(--card); border: 1px solid var(--border);
@@ -880,7 +895,8 @@
       .exp-body { padding: 32px 24px; }
       .photo-strip { grid-template-columns: 1fr; gap: 10px; }
       .photo-strip-item { aspect-ratio: 16/9; }
-      .menu-grid { grid-template-columns: 1fr; }
+      .product-card { flex: 0 0 160px; }
+      .product-card-img { padding: 12px; }
       .drinks-grid { grid-template-columns: 1fr; }
       .drink-category { border-right: none; border-bottom: 1px solid var(--border); }
       .drink-category:last-child { border-bottom: none; }
@@ -1170,46 +1186,96 @@
       <p>Two world-class tobacco brands with 20 flavors. Prepared fresh, served smooth.</p>
     </div>
 
-    <div class="menu-grid">
-      <div class="brand-card">
-        <div class="brand-header">
-          <h3>Al Fakher</h3>
-          <span class="brand-badge">Classic</span>
+    <div class="brand-row">
+      <div class="brand-row-header">
+        <h3>Al Fakher</h3>
+        <span class="brand-badge">Classic</span>
+      </div>
+      <div class="product-carousel">
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-double-apple.webp"><img src="assets/img/products/af-double-apple.png" alt="Al Fakher Double Apple" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Double Apple</div><div class="product-card-brand">Al Fakher</div></div>
         </div>
-        <div class="brand-flavors">
-          <div class="flavor-list">
-            <span class="flavor-tag">White Grape</span>
-            <span class="flavor-tag">Double Apple</span>
-            <span class="flavor-tag">Orange</span>
-            <span class="flavor-tag">Strawberry</span>
-            <span class="flavor-tag">Peach</span>
-            <span class="flavor-tag">Watermelon</span>
-            <span class="flavor-tag">Pineapple</span>
-            <span class="flavor-tag">Vanilla</span>
-            <span class="flavor-tag">Mint</span>
-            <span class="flavor-tag">Mango</span>
-            <span class="flavor-tag">Lemon</span>
-          </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-mint.webp"><img src="assets/img/products/af-mint.png" alt="Al Fakher Mint" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Mint</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-white-grape.webp"><img src="assets/img/products/af-white-grape.png" alt="Al Fakher White Grape" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">White Grape</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-watermelon.webp"><img src="assets/img/products/af-watermelon.png" alt="Al Fakher Watermelon" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Watermelon</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-strawberry.webp"><img src="assets/img/products/af-strawberry.png" alt="Al Fakher Strawberry" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Strawberry</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-orange.webp"><img src="assets/img/products/af-orange.png" alt="Al Fakher Orange" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Orange</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-peach.webp"><img src="assets/img/products/af-peach.png" alt="Al Fakher Peach" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Peach</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-mango.webp"><img src="assets/img/products/af-mango.png" alt="Al Fakher Mango" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Mango</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-lemon.webp"><img src="assets/img/products/af-lemon.png" alt="Al Fakher Lemon" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Lemon</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-pineapple.webp"><img src="assets/img/products/af-pineapple.png" alt="Al Fakher Pineapple" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Pineapple</div><div class="product-card-brand">Al Fakher</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/af-vanilla.webp"><img src="assets/img/products/af-vanilla.png" alt="Al Fakher Vanilla" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Vanilla</div><div class="product-card-brand">Al Fakher</div></div>
         </div>
       </div>
+    </div>
 
-      <div class="brand-card">
-        <div class="brand-header">
-          <h3>Starbuzz</h3>
-          <span class="brand-badge">Premium</span>
+    <div class="brand-row">
+      <div class="brand-row-header">
+        <h3>Starbuzz</h3>
+        <span class="brand-badge">Premium</span>
+      </div>
+      <div class="product-carousel">
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-blue-mist.webp"><img src="assets/img/products/sb-blue-mist.png" alt="Starbuzz Blue Mist" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Blue Mist</div><div class="product-card-brand">Starbuzz Exotic</div></div>
         </div>
-        <div class="brand-flavors">
-          <div class="flavor-list">
-            <span class="flavor-tag">Blue Mist</span>
-            <span class="flavor-tag">White Mint</span>
-            <span class="flavor-tag">Gum</span>
-            <span class="flavor-tag">Sex on the Beach</span>
-            <span class="flavor-tag">Code69</span>
-            <span class="flavor-tag">Peach Mist</span>
-            <span class="flavor-tag">Irish Kiss</span>
-            <span class="flavor-tag">Melon Dew</span>
-            <span class="flavor-tag">Pan</span>
-          </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-white-mint.webp"><img src="assets/img/products/sb-white-mint.png" alt="Starbuzz White Mint" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">White Mint</div><div class="product-card-brand">Starbuzz Bold</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-sex-on-the-beach.webp"><img src="assets/img/products/sb-sex-on-the-beach.png" alt="Starbuzz Sex on the Beach" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Sex on the Beach</div><div class="product-card-brand">Starbuzz Exotic</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-code69.webp"><img src="assets/img/products/sb-code69.png" alt="Starbuzz Code 69" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Code 69</div><div class="product-card-brand">Starbuzz Exotic</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-gum.webp"><img src="assets/img/products/sb-gum.png" alt="Starbuzz Bubble Gum" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Gum</div><div class="product-card-brand">Starbuzz Exotic</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-peach-mist.webp"><img src="assets/img/products/sb-peach-mist.png" alt="Starbuzz Peach Mist" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Peach Mist</div><div class="product-card-brand">Starbuzz Bold</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-irish-kiss.webp"><img src="assets/img/products/sb-irish-kiss.png" alt="Starbuzz Irish Kiss" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Irish Kiss</div><div class="product-card-brand">Starbuzz Bold</div></div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-img"><picture><source type="image/webp" srcset="assets/img/products/sb-melon-dew.webp"><img src="assets/img/products/sb-melon-dew.png" alt="Starbuzz Melon Dew" loading="lazy" width="400" height="400"></picture></div>
+          <div class="product-card-body"><div class="product-card-name">Melon Dew</div><div class="product-card-brand">Starbuzz Exotic</div></div>
         </div>
       </div>
     </div>
